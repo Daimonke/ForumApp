@@ -21,6 +21,7 @@ body {
 
 .page {
   overflow: hidden;
+  scroll-behavior: smooth;
 }
 
 .show {
@@ -30,6 +31,10 @@ body {
 .remove {
   animation: 0.2s remove forwards;
  
+}
+
+.fadeIn {
+  animation: 0.3s fadeIn linear;
 }
 
 @keyframes show {
@@ -47,5 +52,14 @@ body {
   }
   to {
     transform: translateX(100%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-150%)
+  }
+  to {
+    transform: translateY(0%)
   }
 }

@@ -4,12 +4,12 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <div className="h-10 absolute bottom-0 left-0 right-0 bg-slate-800 flex items-center justify-center">
+    <div className="h-10 absolute bottom-0 left-0 right-0 bg-slate-900 flex items-center justify-center border-t-2 border-blue-600">
       <a
         href="https://github.com/Daimonke"
         target="_blank"
         rel="noreferrer"
-        className="text-teal-400 hover:text-teal-200 no-underline"
+        className="text-blue-200 hover:text-blue-400 no-underline"
       >
         © Daimonke
       </a>

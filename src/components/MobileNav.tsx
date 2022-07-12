@@ -17,9 +17,10 @@ type Props = {
     path?: string;
     divider?: boolean;
   }[];
+  classes?: string;
 };
 
-const MobileNav = ({ links }: Props) => {
+const MobileNav = ({ links, classes }: Props) => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -37,14 +38,17 @@ const MobileNav = ({ links }: Props) => {
   return (
     <>
       <IconButton
-        color="inherit"
         onClick={() => setOpen(true)}
         size="large"
-        sx={{ position: "absolute", height: "fit-content", right: 10 }}
+        sx={{
+          position: "absolute",
+          right: 28,
+        }}
       >
-        <MenuIcon fontSize="large" />
+        <MenuIcon fontSize="large" className={`text-blue-900 ${classes}`} />
       </IconButton>
       <Drawer
+        disableRestoreFocus
         anchor="right"
         open={open}
         onClose={() => setOpen(false)}

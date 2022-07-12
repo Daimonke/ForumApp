@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
+import Header from "../components/Header";
 import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
@@ -8,13 +9,18 @@ const Index = () => {
   const location = useLocation().pathname;
   const [displayLocation, setDisplayLocation] = useState<string>(location);
   const [transition, setTransition] = useState("show");
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (location !== displayLocation) setTransition("remove");
+    if (location !== displayLocation) {
+      setIsVisible(true);
+      setTransition("remove");
+    }
   }, [location, displayLocation]);
 
   return (
     <div className="page">
+      <Header isVisible={isVisible} setIsVisible={setIsVisible} />
       <div
         className={`${transition}`}
         onAnimationEnd={() => {
