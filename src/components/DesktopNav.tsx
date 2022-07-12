@@ -21,16 +21,19 @@ const DesktopNav = ({ links }: Props) => {
     <div className="flex gap-5 p-4">
       {links.map((link, index) =>
         link.divider ? null : (
-          <Link key={index} to={link.path!}>
-            <button
-              className={
-                "px-3 py-0 border-b-2 border-b-yellow-400 transition-all hover:-translate-y-1 text-gray-800 text-xl h-full " +
-                (link.path === active ? "border-b-blue-400" : "")
-              }
-            >
-              {link.name}
-            </button>
-          </Link>
+          <div className="p-1 transition-all hover:-translate-y-0.5">
+            <Link key={index} to={link.path!}>
+              <button
+                className={
+                  "px-3 py-0 border-b-2 border-b-black text-gray-100 text-xl" +
+                  " " +
+                  (link.path === active ? "border-b-red-500" : "")
+                }
+              >
+                {link.name?.toUpperCase()}
+              </button>
+            </Link>
+          </div>
         )
       )}
     </div>

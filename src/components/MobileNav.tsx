@@ -44,8 +44,13 @@ const MobileNav = ({ links }: Props) => {
       >
         <MenuIcon fontSize="large" />
       </IconButton>
-      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <List sx={{ minWidth: 150 }}>
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={() => setOpen(false)}
+        PaperProps={{ sx: { backgroundColor: "black" } }}
+      >
+        <List sx={{ minWidth: 150 }} disablePadding>
           {links.map((link, index) =>
             link.divider ? (
               <Divider key={index} className="bg-gray-400" />
@@ -54,11 +59,11 @@ const MobileNav = ({ links }: Props) => {
                 key={index}
                 disablePadding
                 onClick={() => handleClick(link.path!)}
-                className={active === link.path ? "bg-gray-200" : ""}
+                className={active === link.path ? "bg-gray-700" : ""}
               >
                 <ListItemButton>
                   <ListItemText
-                    sx={{ textAlign: "center" }}
+                    sx={{ textAlign: "center", color: "white" }}
                     primary={link.name}
                   />
                 </ListItemButton>
