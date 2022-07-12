@@ -7,6 +7,7 @@ type Props = {
 type Ctx = {
   user: {
     id: number;
+    username: string;
   } | null;
   setUser: (user: Ctx["user"]) => void;
 };

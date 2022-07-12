@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body,html {
+  height: 100vh;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
@@ -11,4 +15,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(36, 36, 36);
   color: rgb(241, 241, 241);
+}
+
+.page {
+  overflow: hidden;
+}
+
+.show {
+  animation: 0.2s show forwards;
+}
+
+.remove {
+  animation: 0.2s remove forwards;
+ 
+}
+
+@keyframes show {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes remove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
