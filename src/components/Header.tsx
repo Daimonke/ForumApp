@@ -76,7 +76,8 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
           {md && !isVisible ? (
             <DesktopNav
               links={links}
-              classes={`fixed z-10 top-0 bg-gradient-to-t from-slate-600 to-gray-300 w-full justify-center fadeIn transition-all max-h-[${headerHeight}px]`}
+              classes={`fixed p-3 border-b-2 border-gray-400 z-10 top-0 bg-gradient-to-b from-slate-700 to-gray-500 w-full justify-center fadeIn transition-all max-h-[${headerHeight}px]`}
+              font={"text-sm py-0"}
             />
           ) : !md && !isVisible ? (
             <MobileNav

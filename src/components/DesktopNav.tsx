@@ -8,9 +8,10 @@ type Props = {
     divider?: boolean;
   }[];
   classes?: string;
+  font?: string;
 };
 
-const DesktopNav = ({ links, classes }: Props) => {
+const DesktopNav = ({ links, classes, font }: Props) => {
   const location = useLocation().pathname;
   const [active, setActive] = useState<string | null>(location);
 
@@ -25,11 +26,8 @@ const DesktopNav = ({ links, classes }: Props) => {
           <div className="transition-all hover:-translate-y-1" key={index}>
             <Link to={link.path!}>
               <button
-                className={
-                  "px-3 py-1 border-b-2 border-b-black text-gray-100 text-xl" +
-                  " " +
-                  (link.path === active ? "border-b-red-500" : "")
-                }
+                className={`${link.path === active ? "border-b-red-500 " : ""} 
+                px-3 py-1 border-b-2 border-b-black text-gray-100 text-xl ${font}`}
               >
                 {link.name?.toUpperCase()}
               </button>

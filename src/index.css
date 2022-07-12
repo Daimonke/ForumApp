@@ -37,6 +37,10 @@ body {
   animation: 0.3s fadeIn linear;
 }
 
+.growAnimation {
+  animation: 1s growAnimation linear;
+}
+
 @keyframes show {
   from {
     transform: translateX(-100%);
@@ -57,9 +61,18 @@ body {
 
 @keyframes fadeIn {
   from {
-    transform: translateY(-150%)
+    transform: translateY(-100%)
   }
   to {
     transform: translateY(0%)
+  }
+}
+
+@keyframes growAnimation {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
   }
 }
