@@ -14,6 +14,7 @@ const Index = () => {
   useEffect(() => {
     if (location !== displayLocation) {
       setTransition("remove");
+      setIsVisible(true);
     }
   }, [location, displayLocation]);
 
@@ -28,6 +29,8 @@ const Index = () => {
             setDisplayLocation(location);
             if (location !== "/") {
               window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+              window.scrollTo({ top: window.scrollY - 1, behavior: "smooth" });
             }
           }
         }}

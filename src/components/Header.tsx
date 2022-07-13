@@ -1,5 +1,5 @@
 import { Container, LinearProgress, useMediaQuery } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { context } from "../Context";
@@ -29,12 +29,18 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
   const [windowScroll, setWindowScroll] = useState(window.scrollY);
   const [headerHeight, setHeaderHeight] = useState(0);
 
-  const offlineLinks = [
-    { name: "Login", path: "/login" },
-    { name: "Signup", path: "/register" },
-  ];
+  const offlineLinks = useMemo(
+    () => [
+      { name: "Login", path: "/login" },
+      { name: "Signup", path: "/register" },
+    ],
+    []
+  );
 
-  const mainLinks = [{ name: "Home", path: "/" }, { divider: true }];
+  const mainLinks = useMemo(
+    () => [{ name: "Home", path: "/" }, { divider: true }],
+    []
+  );
 
   const [links, setLinks] = useState<Links>([...mainLinks, ...offlineLinks]);
 
@@ -44,7 +50,7 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
     } else {
       setLinks([...mainLinks, ...offlineLinks]);
     }
-  }, [ctx.user]);
+  }, [ctx.user, mainLinks, offlineLinks]);
 
   window.onscroll = () => {
     setWindowScroll(window.scrollY);

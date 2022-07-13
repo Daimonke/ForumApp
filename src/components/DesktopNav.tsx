@@ -32,7 +32,7 @@ const DesktopNav = ({ links, classes, font }: Props) => {
               <button
                 className={`
                 px-3 py-1 border-b-2  text-gray-100 text-xl ${font} ${
-                  link.path === active ? "border-b-red-500" : "border-b-black"
+                  link.path === active ? "border-b-red-600" : "border-b-black"
                 }`}
               >
                 {link.name?.toUpperCase()}
@@ -43,7 +43,7 @@ const DesktopNav = ({ links, classes, font }: Props) => {
       )}
       {ctx.user && (
         <>
-          <span className="border-r-[1px] "></span>
+          <span className="border-r-[1px]"></span>
           <AccountMenu classes={btnClasses} />
         </>
       )}

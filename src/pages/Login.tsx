@@ -38,22 +38,22 @@ const Login = () => {
       });
       ctx.setUser(null);
     } else {
+      ctx.setUser({
+        id: data.id,
+        username: username,
+      });
       setFormData({
         username: "",
         password: "",
         error: "",
         loading: false,
       });
-      ctx.setUser({
-        id: data.id,
-        username: username,
-      });
       navigate("/");
     }
   };
 
   const inputClass =
-    "w-full outline-none py-2 px-5 border-2 border-blue-300 rounded-md focus:border-blue-500 text-gray-100 bg-black placeholder-gray-400";
+    "autofill:bg-yellow-500 w-full outline-none py-2 px-5 border-2 border-blue-300 rounded-md focus:border-blue-500 text-gray-100 bg-black placeholder-gray-400";
   return (
     <div className="mt-[7vh] py-2 px-5 sm:px-20">
       <form
@@ -78,7 +78,7 @@ const Login = () => {
           type="password"
           placeholder="Password"
           name="password"
-          autoComplete="current-password"
+          autoComplete="password"
           value={password}
           onChange={(e) =>
             setFormData({ ...formData, password: e.target.value })

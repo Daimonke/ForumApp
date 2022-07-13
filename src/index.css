@@ -34,7 +34,7 @@ body {
 }
 
 .fadeIn {
-  animation: 0.3s fadeIn forwards;
+  animation: 0.5s fadeIn forwards;
 }
 
 .growAnimation {
@@ -56,6 +56,14 @@ body {
     -ms-transform: rotate(-180);
     -o-transform: rotate(-180);
     transform: rotate(-180);
+}
+
+.elevate {
+  animation: 0.5s elevate forwards;
+}
+
+.opacity {
+  animation: 1s opacity linear;
 }
 
 @keyframes show {
@@ -109,5 +117,23 @@ body {
   }
   to {
     transform: rotate(0deg);
+  }
+}
+
+@keyframes elevate {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

@@ -79,7 +79,7 @@ const MobileNav = ({ links, classes }: Props) => {
             )
           )}
           {ctx.user && (
-            <div className="w-full relative">
+            <div className="">
               <AccountMenu
                 mobile
                 classes="px-2 py-3 bg-gray-900 w-full text-white flex justify-center"
