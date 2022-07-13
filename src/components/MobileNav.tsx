@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Divider,
   Drawer,
@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
+import AccountMenu from "./AccountMenu";
+import { context } from "../Context";
 
 type Props = {
   links: {
@@ -22,6 +24,8 @@ type Props = {
 
 const MobileNav = ({ links, classes }: Props) => {
   const navigate = useNavigate();
+
+  const ctx = useContext(context);
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(window.location.pathname);
@@ -63,7 +67,7 @@ const MobileNav = ({ links, classes }: Props) => {
                 key={index}
                 disablePadding
                 onClick={() => handleClick(link.path!)}
-                className={active === link.path ? "bg-gray-700" : ""}
+                className={active === link.path ? "bg-gray-700" : "bg-gray-900"}
               >
                 <ListItemButton>
                   <ListItemText
@@ -73,6 +77,14 @@ const MobileNav = ({ links, classes }: Props) => {
                 </ListItemButton>
               </ListItem>
             )
+          )}
+          {ctx.user && (
+            <div className="w-full relative">
+              <AccountMenu
+                fullWidth
+                classes="px-2 py-3 bg-gray-900 w-full text-white"
+              />
+            </div>
           )}
         </List>
       </Drawer>
