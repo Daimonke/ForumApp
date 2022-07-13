@@ -1,6 +1,7 @@
 import { Alert, CircularProgress, Collapse } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { context } from "../Context";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const Register = () => {
 
   const { username, password, confirmPassword, error, loading, message } =
     formData;
+
+  const ctx = useContext(context);
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,6 +47,10 @@ const Register = () => {
         error: "",
         message: data.message,
         loading: false,
+      });
+      ctx.setUser({
+        id: data.id,
+        username: username,
       });
     }
   };

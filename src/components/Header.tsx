@@ -1,7 +1,8 @@
 import { Container, useMediaQuery } from "@mui/material";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { context } from "../Context";
 import logo from "../images/logo.png";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
@@ -23,26 +24,27 @@ type Props = {
 
 const Header = ({ isVisible, setIsVisible }: Props) => {
   const md = useMediaQuery("(min-width:768px)");
+  const ctx = useContext(context);
+
   const [windowScroll, setWindowScroll] = useState(window.scrollY);
   const [headerHeight, setHeaderHeight] = useState(0);
 
-  const links: Links = [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      divider: true,
-    },
-    {
-      name: "Login",
-      path: "/login",
-    },
-    {
-      name: "Signup",
-      path: "/register",
-    },
+  const offlineLinks = [
+    { name: "Login", path: "/login" },
+    { name: "Signup", path: "/register" },
   ];
+
+  const mainLinks = [{ name: "Home", path: "/" }, { divider: true }];
+
+  const [links, setLinks] = useState<Links>([...mainLinks, ...offlineLinks]);
+
+  useEffect(() => {
+    if (ctx.user) {
+      setLinks([...mainLinks]);
+    } else {
+      setLinks([...mainLinks, ...offlineLinks]);
+    }
+  }, [ctx.user]);
 
   window.onscroll = () => {
     setWindowScroll(window.scrollY);
@@ -82,7 +84,7 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
           ) : !md && !isVisible ? (
             <MobileNav
               links={links}
-              classes={"fixed z-10 top-4 right-5 text-white fadeIn"}
+              classes={"fixed z-10 top-4 right-5 !text-blue-200 fadeIn"}
             />
           ) : null}
         </div>

@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { Divider } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { context } from "../Context";
+import AccountMenu from "./AccountMenu";
 
 type Props = {
   links: {
@@ -14,6 +17,8 @@ type Props = {
 const DesktopNav = ({ links, classes, font }: Props) => {
   const location = useLocation().pathname;
   const [active, setActive] = useState<string | null>(location);
+  const ctx = useContext(context);
+  const btnClasses = `px-3 py-1 border-b-2  text-gray-100 text-xl ${font} `;
 
   useEffect(() => {
     setActive(location);
@@ -26,14 +31,22 @@ const DesktopNav = ({ links, classes, font }: Props) => {
           <div className="transition-all hover:-translate-y-1" key={index}>
             <Link to={link.path!}>
               <button
-                className={`${link.path === active ? "border-b-red-500 " : ""} 
-                px-3 py-1 border-b-2 border-b-black text-gray-100 text-xl ${font}`}
+                className={`
+                px-3 py-1 border-b-2  text-gray-100 text-xl ${font} ${
+                  link.path === active ? "border-b-red-500" : "border-b-black"
+                }`}
               >
                 {link.name?.toUpperCase()}
               </button>
             </Link>
           </div>
         )
+      )}
+      {ctx.user && (
+        <>
+          <span className="border-r-[1px] "></span>
+          <AccountMenu classes={btnClasses} />
+        </>
       )}
     </div>
   );
