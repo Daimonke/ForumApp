@@ -18,6 +18,7 @@ const Login = () => {
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    ctx.setUser(false);
     setFormData({ ...formData, loading: true });
     const url = `auth/login`;
     const options = {
@@ -35,6 +36,7 @@ const Login = () => {
         error: data.message,
         loading: false,
       });
+      ctx.setUser(null);
     } else {
       setFormData({
         username: "",

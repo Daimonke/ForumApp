@@ -5,31 +5,22 @@ type Props = {
 };
 
 type Ctx = {
-  user: {
-    id: number;
-    username: string;
-  } | null;
+  user:
+    | {
+        id: number;
+        username: string;
+      }
+    | boolean
+    | null;
   setUser: (user: Ctx["user"]) => void;
 };
 
 const initialValue: Ctx = {
-  user: null,
+  user: false,
   setUser: (user) => {},
 };
 
 export const context = createContext(initialValue);
-
-const getUser = async () => {
-  console.log("yo");
-  const user = await fetch("/auth/verifyUser");
-  const userJson = await user.json();
-  if (userJson.success) {
-    return {
-      id: userJson.id,
-      username: userJson.username,
-    };
-  }
-};
 
 const Context = ({ children }: Props) => {
   const [user, setUser] = useState(initialValue.user);
@@ -42,6 +33,8 @@ const Context = ({ children }: Props) => {
         id: userJson.id,
         username: userJson.username,
       });
+    } else {
+      setUser(null);
     }
   };
 

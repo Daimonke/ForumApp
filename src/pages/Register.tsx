@@ -1,4 +1,4 @@
-import { Alert, CircularProgress, Collapse } from "@mui/material";
+import { Alert, CircularProgress } from "@mui/material";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { context } from "../Context";
@@ -20,6 +20,7 @@ const Register = () => {
   const ctx = useContext(context);
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    ctx.setUser(false);
     e.preventDefault();
     setFormData({ ...formData, loading: true });
     const url = `auth/register`;
@@ -39,6 +40,7 @@ const Register = () => {
         message: "",
         loading: false,
       });
+      ctx.setUser(null);
     } else {
       setFormData({
         username: "",

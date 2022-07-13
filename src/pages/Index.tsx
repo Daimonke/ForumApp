@@ -9,11 +9,10 @@ const Index = () => {
   const location = useLocation().pathname;
   const [displayLocation, setDisplayLocation] = useState<string>(location);
   const [transition, setTransition] = useState("show");
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (location !== displayLocation) {
-      setIsVisible(true);
       setTransition("remove");
     }
   }, [location, displayLocation]);
@@ -27,6 +26,9 @@ const Index = () => {
           if (transition === "remove") {
             setTransition("show");
             setDisplayLocation(location);
+            if (location !== "/") {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
           }
         }}
       >

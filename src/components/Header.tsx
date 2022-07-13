@@ -1,4 +1,4 @@
-import { Container, useMediaQuery } from "@mui/material";
+import { Container, LinearProgress, useMediaQuery } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -74,7 +74,15 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
           <Link to="/">
             <img src={logo} alt="logo" className="h-32 md:h-64"></img>
           </Link>
-          {md ? <DesktopNav links={links} /> : <MobileNav links={links} />}
+          {ctx.user === false && md ? (
+            <div className="w-full py-[33px]">
+              <LinearProgress />
+            </div>
+          ) : md ? (
+            <DesktopNav links={links} />
+          ) : (
+            <MobileNav links={links} />
+          )}
           {md && !isVisible ? (
             <DesktopNav
               links={links}

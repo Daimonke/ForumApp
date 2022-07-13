@@ -1,4 +1,3 @@
-import { Divider } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { context } from "../Context";
@@ -18,7 +17,7 @@ const DesktopNav = ({ links, classes, font }: Props) => {
   const location = useLocation().pathname;
   const [active, setActive] = useState<string | null>(location);
   const ctx = useContext(context);
-  const btnClasses = `px-3 py-1 border-b-2  text-gray-100 text-xl ${font} `;
+  const btnClasses = `flex align-middle px-3 py-1 border-b-2  text-gray-100 text-xl ${font} `;
 
   useEffect(() => {
     setActive(location);
