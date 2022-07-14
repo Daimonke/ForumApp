@@ -10,7 +10,7 @@ type Ctx = {
         id: number;
         username: string;
       }
-    | boolean
+    | false
     | null;
   setUser: (user: Ctx["user"]) => void;
 };

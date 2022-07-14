@@ -1,10 +1,9 @@
 import React from "react";
 
-type Props = {};
-
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <div className="h-10 absolute bottom-0 left-0 right-0 bg-slate-900 flex items-center justify-center border-t-2 border-blue-600">
+      {/* External Link */}
       <a
         href="https://github.com/Daimonke"
         target="_blank"

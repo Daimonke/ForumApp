@@ -1,7 +1,7 @@
 import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { context } from "../Context";
+import { context } from "../context/Context";
 import Arrows from "@mui/icons-material/KeyboardDoubleArrowDown";
 import { CircularProgress } from "@mui/material";
 
@@ -71,8 +71,10 @@ export default function AccountMenu({ classes, mobile }: Props) {
             "aria-labelledby": "basic-button",
           }}
           classes={{
-            paper: `mt-[-2px] ${mobile ? "absolute right-0" : ""}`,
-            list: `bg-slate-300 text-gray-800`,
+            paper: `!rounded-t-none ${
+              mobile ? "absolute right-0" : " mt-[-4px]"
+            }`,
+            list: `bg-slate-200 text-gray-800`,
           }}
         >
           <MenuItem onClick={handleClose} disabled>

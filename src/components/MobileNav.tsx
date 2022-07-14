@@ -11,7 +11,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import AccountMenu from "./AccountMenu";
-import { context } from "../Context";
+import { context } from "../context/Context";
 
 type Props = {
   links: {
