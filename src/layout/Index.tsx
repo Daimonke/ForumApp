@@ -29,9 +29,9 @@ const Index = () => {
   }, [location]);
 
   return (
-    <div className="page">
+    <div className="page h-[100vh] mb-[-2.5rem]">
       <Header isVisible={isVisible} setIsVisible={setIsVisible} />
-      <div className={transition} onAnimationEnd={pageAnimation}>
+      <div className={transition + " h-full"} onAnimationEnd={pageAnimation}>
         <Routes location={displayLocation}>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />

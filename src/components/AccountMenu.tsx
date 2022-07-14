@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { context } from "../context/Context";
 import Arrows from "@mui/icons-material/KeyboardDoubleArrowDown";
 import { CircularProgress } from "@mui/material";
+import userEvent from "@testing-library/user-event";
 
 type Props = {
   classes?: string;
@@ -51,7 +52,7 @@ export default function AccountMenu({ classes, mobile }: Props) {
             onClick={handleClick}
             className={classes}
           >
-            <span>ACCOUNT</span>
+            <span>{ctx.user ? ctx.user.username : "ACCOUNT"}</span>
             <div className="flex h-full align-middle items-center justify-center">
               <Arrows
                 className={`text-green-500 mr-[-0.5rem] ${

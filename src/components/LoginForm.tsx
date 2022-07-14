@@ -40,7 +40,7 @@ const LoginForm = () => {
     } else {
       ctx.setUser({
         id: data.id,
-        username: username,
+        username: data.username,
       });
       setFormData({
         username: "",
@@ -53,7 +53,7 @@ const LoginForm = () => {
   };
 
   const inputClass =
-    "autofill:bg-yellow-500 w-full outline-none py-2 px-5 border-2 border-blue-300 rounded-md focus:border-blue-500 text-gray-100 bg-black placeholder-gray-400";
+    "w-full outline-none py-2 px-5 border-2 border-blue-300 rounded-md focus:border-blue-500 text-gray-100 bg-black/50 placeholder-gray-400";
   return (
     <>
       <form

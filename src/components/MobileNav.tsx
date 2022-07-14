@@ -46,7 +46,7 @@ const MobileNav = ({ links, classes }: Props) => {
         size="large"
         sx={{
           position: "absolute",
-          right: 28,
+          right: 8,
         }}
       >
         <MenuIcon fontSize="large" className={`text-blue-900 ${classes}`} />

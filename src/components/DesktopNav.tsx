@@ -35,7 +35,7 @@ const DesktopNav = ({ links, classes, font }: Props) => {
                   link.path === active ? "border-b-red-600" : "border-b-black"
                 }`}
               >
-                {link.name?.toUpperCase()}
+                {link.name}
               </button>
             </Link>
           </div>
