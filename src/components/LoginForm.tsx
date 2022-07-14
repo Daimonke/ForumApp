@@ -41,6 +41,7 @@ const LoginForm = () => {
       ctx.setUser({
         id: data.id,
         username: data.username,
+        avatar: data.avatar,
       });
       setFormData({
         username: "",

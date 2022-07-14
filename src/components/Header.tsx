@@ -1,4 +1,9 @@
-import { Container, LinearProgress, useMediaQuery } from "@mui/material";
+import {
+  Container,
+  LinearProgress,
+  Skeleton,
+  useMediaQuery,
+} from "@mui/material";
 import { useContext, useEffect, useMemo } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -28,6 +33,7 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
 
   const [windowScroll, setWindowScroll] = useState(window.scrollY);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const offlineLinks = useMemo(
     () => [
@@ -78,7 +84,20 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
       <Container className="relative bg">
         <div className="flex justify-center items-center flex-col m-auto">
           <Link to="/">
-            <img src={logo} alt="logo" className="h-32 md:h-64"></img>
+            {!imageLoaded && (
+              <Skeleton
+                variant="circular"
+                width={md ? "190px" : "90px"}
+                height={md ? "190px" : "90px"}
+                sx={{ m: 4.5 }}
+              />
+            )}
+            <img
+              src={logo}
+              alt="logo"
+              className={`h-32 md:h-64 ${imageLoaded ? "" : "hidden"}`}
+              onLoad={() => setImageLoaded(true)}
+            ></img>
           </Link>
           {ctx.user === false && md ? (
             <div className="w-full py-[33px]">

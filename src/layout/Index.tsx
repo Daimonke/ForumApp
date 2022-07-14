@@ -29,7 +29,7 @@ const Index = () => {
   }, [location]);
 
   return (
-    <div className="page h-[100vh] mb-[-2.5rem]">
+    <div className="page">
       <Header isVisible={isVisible} setIsVisible={setIsVisible} />
       <div className={transition + " h-full"} onAnimationEnd={pageAnimation}>
         <Routes location={displayLocation}>
