@@ -68,6 +68,12 @@ height: 100%;
   animation: 1s opacity linear;
 }
 
+.jump {
+  animation: 0.3s jump 2 linear;
+}
+
+
+
 @keyframes show {
   from {
     transform: translateX(-100%);
@@ -137,5 +143,17 @@ height: 100%;
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

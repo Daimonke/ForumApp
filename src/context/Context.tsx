@@ -9,6 +9,7 @@ export type PostsPost = {
   content: string;
   created_at: string;
   user_id: number;
+  postVotes: number;
 };
 
 export type PostsUser = {

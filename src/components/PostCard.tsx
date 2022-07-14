@@ -26,7 +26,7 @@ const PostCard = ({ item }: Props) => {
           <p className="line-clamp-2 mt-2">{content}</p>
         </div>
         <Divider className="bg-blue-300 h-[2px]" />
-        <PostNav />
+        <PostNav post={item.post} />
       </div>
     </div>
   );

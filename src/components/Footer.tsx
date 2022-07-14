@@ -1,8 +1,4 @@
-import React, { useContext } from "react";
-import { context } from "../context/Context";
-
 const Footer = () => {
-  const ctx = useContext(context);
   return (
     <div className="fixed h-10 bottom-0 left-0 right-0 bg-slate-900 flex items-center justify-center border-t-2 border-blue-600">
       {/* External Link */}
