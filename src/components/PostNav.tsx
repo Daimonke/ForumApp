@@ -11,28 +11,60 @@ type Props = {
 };
 
 const PostNav = ({ post }: Props) => {
+  const { userVoted, postVotes, id } = post;
+
   const ctx = useContext(context);
-  const [votes, setVotes] = useState(post.postVotes);
+  const [votes, setVotes] = useState(postVotes);
   const [open, setOpen] = useState(false);
   const [jump, setJump] = useState(false);
 
+  const deleteVote = () => {
+    fetch(`content/vote/${id}`, {
+      method: "DELETE",
+    });
+  };
+
+  const setUserVote = async (vote: number | null) => {
+    ctx.setPosts(
+      ctx.posts.map((item) =>
+        item.post.id === id
+          ? {
+              post: { ...item.post, userVoted: vote },
+              user: { ...item.user },
+            }
+          : item
+      )
+    );
+  };
+
   const handleVote = async (vote: number) => {
+    let inc = 1;
     if (!ctx.user) return setOpen(true);
+    if (userVoted === vote) {
+      deleteVote();
+      setVotes(vote === 0 ? votes + 1 : votes - 1);
+      return setUserVote(null);
+    }
+    if (userVoted !== null) {
+      deleteVote();
+      inc = 2;
+    }
     const data = await fetch("content/vote", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        post_id: post.id,
+        post_id: id,
         user_id: ctx.user.id,
         vote: vote,
       }),
     });
     const json = await data.json();
     if (json.success) {
-      vote === 1 ? setVotes(votes + 1) : setVotes(votes - 1);
+      vote === 1 ? setVotes(votes + inc) : setVotes(votes - inc);
       setJump(true);
+      setUserVote(vote);
     } else {
       console.log(json.message);
     }
@@ -42,7 +74,10 @@ const PostNav = ({ post }: Props) => {
     <>
       <div className="flex items-center gap-2 mt-2">
         <IconButton sx={{ p: 0 }} onClick={() => handleVote(1)}>
-          <ThumbUpIcon className="text-blue-700" fontSize="medium" />
+          <ThumbUpIcon
+            className={userVoted === 1 ? "text-blue-700" : ""}
+            fontSize="medium"
+          />
         </IconButton>
         <span
           className={`text-xl ${
@@ -57,7 +92,10 @@ const PostNav = ({ post }: Props) => {
           {votes}
         </span>
         <IconButton sx={{ p: 0 }} onClick={() => handleVote(0)}>
-          <ThumbDownIcon className="text-red-700" fontSize="medium" />
+          <ThumbDownIcon
+            className={userVoted === 0 ? "text-red-700" : ""}
+            fontSize="medium"
+          />
         </IconButton>
         <BasicModal open={open} setOpen={setOpen} />
       </div>

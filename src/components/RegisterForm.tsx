@@ -56,6 +56,7 @@ const RegisterForm = () => {
         avatar: data.avatar,
       });
     }
+    ctx.setUpdate(!ctx.update);
   };
 
   const inputClass =

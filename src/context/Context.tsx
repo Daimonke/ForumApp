@@ -10,6 +10,7 @@ export type PostsPost = {
   created_at: string;
   user_id: number;
   postVotes: number;
+  userVoted: number | null;
 };
 
 export type PostsUser = {
@@ -36,6 +37,8 @@ type Ctx = {
   posts: PostsData[];
   setPosts: (posts: Ctx["posts"]) => void;
   getPosts: () => void;
+  setUpdate: (update: boolean) => void;
+  update: boolean;
 };
 
 const initialValue: Ctx = {
@@ -44,6 +47,8 @@ const initialValue: Ctx = {
   posts: [],
   setPosts: (posts) => {},
   getPosts: () => {},
+  setUpdate: (update) => {},
+  update: false,
 };
 
 export const context = createContext(initialValue);
@@ -51,6 +56,7 @@ export const context = createContext(initialValue);
 const Context = ({ children }: Props) => {
   const [user, setUser] = useState(initialValue.user);
   const [posts, setPosts] = useState<PostsData[]>([]);
+  const [update, setUpdate] = useState(initialValue.update);
 
   const getUser = async () => {
     const user = await fetch("/auth/verifyUser");
@@ -72,15 +78,18 @@ const Context = ({ children }: Props) => {
     if (postsJson.success) {
       setPosts(postsJson.posts);
     }
+    console.log(postsJson);
   };
 
   useEffect(() => {
     getUser();
     getPosts();
-  }, []);
+  }, [update]);
 
   return (
-    <context.Provider value={{ user, setUser, posts, setPosts, getPosts }}>
+    <context.Provider
+      value={{ user, setUser, posts, setPosts, getPosts, setUpdate, update }}
+    >
       {children}
     </context.Provider>
   );

@@ -51,6 +51,7 @@ const LoginForm = () => {
       });
       navigate("/");
     }
+    ctx.setUpdate(!ctx.update);
   };
 
   const inputClass =

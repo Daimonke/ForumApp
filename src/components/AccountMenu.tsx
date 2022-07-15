@@ -35,7 +35,10 @@ export default function AccountMenu({ classes, mobile }: Props) {
       .then(() => {
         ctx.setUser(null);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+        ctx.setUpdate(!ctx.update);
+      });
   };
 
   return (
