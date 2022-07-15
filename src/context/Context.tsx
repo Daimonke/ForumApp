@@ -10,7 +10,8 @@ export type PostsPost = {
   created_at: string;
   user_id: number;
   postVotes: number;
-  userVoted: number | null | false;
+  userVoted: number | null;
+  comments: number;
 };
 
 export type PostsUser = {

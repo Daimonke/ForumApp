@@ -13,7 +13,8 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "black",
-  border: "2px solid #000",
+  border: "2px solid #7390E1",
+  borderRadius: "8px",
   boxShadow: 24,
   p: 4,
 };
@@ -28,6 +29,7 @@ export default function BasicModal({ open, setOpen }: Props) {
 
   return (
     <Modal
+      id="modal"
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"

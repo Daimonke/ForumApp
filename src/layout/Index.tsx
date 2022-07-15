@@ -17,11 +17,10 @@ const Index = () => {
 
   const pageAnimation = () => {
     if (transition === "remove") {
-      setTransition("show");
       setDisplayLocation(location);
-      // if (location !== "/") {
+      setTransition("show");
       window.scrollTo({ top: 0, behavior: "smooth" });
-      // }
+      setIsVisible(true);
     }
   };
 
@@ -34,7 +33,7 @@ const Index = () => {
   return (
     <div className="page">
       <Header isVisible={isVisible} setIsVisible={setIsVisible} />
-      <div className={transition + " h-full"} onAnimationEnd={pageAnimation}>
+      <div className={transition} onAnimationEnd={pageAnimation}>
         <Routes location={displayLocation}>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />

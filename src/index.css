@@ -21,6 +21,15 @@ height: 100%;
   color: rgb(241, 241, 241);
 }
 
+img {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  
+}
+
 .page {
   overflow: hidden;
   scroll-behavior: smooth;

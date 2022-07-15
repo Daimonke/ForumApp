@@ -5,13 +5,14 @@ import { IconButton } from "@mui/material";
 import { context, PostsPost } from "../context/Context";
 import { Link } from "react-router-dom";
 import BasicModal from "./BasicModal";
+import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
 
 type Props = {
   post: PostsPost;
 };
 
 const PostNav = ({ post }: Props) => {
-  const { userVoted, postVotes, id } = post;
+  const { userVoted, postVotes, id, comments } = post;
 
   const ctx = useContext(context);
   const [votes, setVotes] = useState(postVotes);
@@ -24,12 +25,16 @@ const PostNav = ({ post }: Props) => {
     });
   };
 
-  const setUserVote = async (vote: number | null | false) => {
+  const setUserVote = async (vote: number | null, incVotes: number) => {
     ctx.setPosts(
       ctx.posts.map((item) =>
         item.post.id === id
           ? {
-              post: { ...item.post, userVoted: vote },
+              post: {
+                ...item.post,
+                userVoted: vote,
+                postVotes: incVotes,
+              },
               user: { ...item.user },
             }
           : item
@@ -38,29 +43,34 @@ const PostNav = ({ post }: Props) => {
   };
 
   const handleVote = async (vote: number) => {
+    setJump(false);
     let inc = 1;
     if (!ctx.user) return setOpen(true);
+    setJump(true);
     if (userVoted === vote) {
       patchVote(2);
-      setVotes(vote === 0 ? votes + 1 : votes - 1);
-      return setUserVote(2);
+      const newVotes = vote === 0 ? votes + 1 : votes - 1;
+      setVotes(newVotes);
+      return setUserVote(2, newVotes);
     }
     if (userVoted === 2) {
       patchVote(vote);
-      setVotes(vote === 0 ? votes - 1 : votes + 1);
-      return setUserVote(vote);
+      const newVotes = vote === 0 ? votes - 1 : votes + 1;
+      setVotes(newVotes);
+      return setUserVote(vote, newVotes);
     }
 
     if (userVoted !== null && userVoted !== 2) {
       patchVote(userVoted === 0 ? 1 : 0);
       inc = 2;
-      vote === 1 ? setVotes(votes + inc) : setVotes(votes - inc);
-      return setUserVote(vote);
+      const newVotes = vote === 1 ? votes + inc : votes - inc;
+      setVotes(newVotes);
+      return setUserVote(vote, newVotes);
     }
     const prevUserVote = userVoted;
-    vote === 1 ? setVotes(votes + inc) : setVotes(votes - inc);
-    setUserVote(vote);
-    setJump(true);
+    const newVotes = vote === 1 ? votes + inc : votes - inc;
+    setVotes(newVotes);
+    setUserVote(vote, newVotes);
 
     const data = await fetch("content/vote", {
       method: "POST",
@@ -75,24 +85,25 @@ const PostNav = ({ post }: Props) => {
     });
     const json = await data.json();
     if (json.success === false) {
-      setUserVote(prevUserVote);
-      vote === 1 ? setVotes(votes - inc) : setVotes(votes + inc);
+      const newVotes = vote === 1 ? votes - inc : votes + inc;
+      setVotes(newVotes);
+      setUserVote(prevUserVote, newVotes);
       console.log(json.message);
     }
   };
 
   return (
     <>
-      <div className="flex items-center justify-between gap-10 mt-2">
-        <div className="flex items-center justify-start gap-2 w-full">
-          <IconButton sx={{ p: 0 }} onClick={() => handleVote(1)}>
+      <div className="flex items-center justify-between gap-5 mt-2">
+        <div className="flex items-center justify-start gap-2">
+          <IconButton sx={{ p: 1 }} onClick={() => handleVote(1)}>
             <ThumbUpIcon
               className={userVoted === 1 ? "text-blue-700" : ""}
               fontSize="medium"
             />
           </IconButton>
-          <span
-            className={`text-xl ${
+          <p
+            className={`text-xl min-w-[1.25rem] flex justify-center  ${
               votes > 0
                 ? "text-blue-900"
                 : votes < 0
@@ -102,20 +113,23 @@ const PostNav = ({ post }: Props) => {
             onAnimationEnd={() => setJump(false)}
           >
             {votes}
-          </span>
-          <IconButton sx={{ p: 0 }} onClick={() => handleVote(0)}>
+          </p>
+          <IconButton sx={{ p: 1 }} onClick={() => handleVote(0)}>
             <ThumbDownIcon
-              className={userVoted === 0 ? "text-red-700" : ""}
+              className={userVoted === 0 ? "text-red-600" : ""}
               fontSize="medium"
             />
           </IconButton>
         </div>
-        <div className="w-full gap-3 flex items-center">
+        <div className="w-full gap-3 flex items-center justify-end">
           <Link
             to={`/post/${id}`}
-            className=" text-center bg-blue-400 text-gray-800 font-bold p-2  rounded-md hover:bg-blue-500 transition-all w-full"
+            className="max-w-[400px] text-xs md:text-lg text-center bg-blue-200 text-gray-800 font-bold p-2  rounded-md hover:bg-blue-500 transition-all w-full"
           >
-            <button>{"Read more"}</button>
+            <button>
+              <QuestionAnswerRoundedIcon sx={{ mr: 0.5 }} />
+              {comments === 1 ? comments + " Comment" : comments + " Comments"}
+            </button>
           </Link>
         </div>
         <BasicModal open={open} setOpen={setOpen} />

@@ -13,15 +13,13 @@ const Home = () => {
   }, [ctx.posts]);
 
   return (
-    <div className="max-w-5xl m-auto">
-      <div className="flex flex-col gap-5 p-3 md:p-5">
-        {posts.length === 0 &&
-          Array.from({ length: 10 }).map((_, i) => <PostSkeleton key={i} />)}
+    <div className="max-w-5xl m-auto flex flex-col gap-5 p-3 md:p-5">
+      {posts.length === 0 &&
+        Array.from({ length: 10 }).map((_, i) => <PostSkeleton key={i} />)}
 
-        {posts.map((item) => (
-          <PostCard key={item.post.id} item={item} />
-        ))}
-      </div>
+      {posts.map((item) => (
+        <PostCard key={item.post.id} item={item} />
+      ))}
     </div>
   );
 };

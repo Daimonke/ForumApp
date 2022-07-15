@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AccountMenu from "./AccountMenu";
 import { context } from "../context/Context";
 
@@ -26,9 +26,10 @@ const MobileNav = ({ links, classes }: Props) => {
   const navigate = useNavigate();
 
   const ctx = useContext(context);
+  const location = useLocation().pathname;
 
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<string | null>(window.location.pathname);
+  const [active, setActive] = useState<string | null>(location);
 
   const handleClick = (path: string) => {
     setOpen(false);
@@ -36,8 +37,8 @@ const MobileNav = ({ links, classes }: Props) => {
   };
 
   useEffect(() => {
-    setActive(window.location.pathname);
-  }, [navigate]);
+    setActive(location);
+  }, [location]);
 
   return (
     <>
