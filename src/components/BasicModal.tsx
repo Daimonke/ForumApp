@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
@@ -26,6 +26,7 @@ type Props = {
 
 export default function BasicModal({ open, setOpen }: Props) {
   const handleClose = () => setOpen(false);
+  const location = useLocation().pathname;
 
   return (
     <Modal
@@ -47,14 +48,14 @@ export default function BasicModal({ open, setOpen }: Props) {
         </IconButton>
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Please{" "}
-          <Link to="/login" className="text-blue-500">
+          <Link to="/login" state={location} className="text-blue-500">
             LOGIN
           </Link>{" "}
           to vote!
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           Or{" "}
-          <Link to="/register" className="text-green-500">
+          <Link to="/register" state={location} className="text-green-500">
             JOIN
           </Link>{" "}
           our community to vote on the best posts!

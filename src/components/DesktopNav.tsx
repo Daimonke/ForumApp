@@ -28,7 +28,7 @@ const DesktopNav = ({ links, classes, font }: Props) => {
       {links.map((link, index) =>
         link.divider ? null : (
           <div className="transition-all hover:-translate-y-1" key={index}>
-            <Link to={link.path!}>
+            <Link to={link.path!} state={location}>
               <button
                 className={`
                 px-3 py-1 border-b-2  text-gray-100 text-xl ${font} ${

@@ -2,39 +2,39 @@ import React, { useContext, useState } from "react";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { IconButton } from "@mui/material";
-import { context, PostsPost } from "../context/Context";
-import { Link } from "react-router-dom";
+import { context } from "../context/Context";
 import BasicModal from "./BasicModal";
-import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
+import { CommentData } from "./CommentsBody";
 
 type Props = {
-  post: PostsPost;
-  disableCommentBtn?: boolean;
+  comment: CommentData["comment"];
+  comments: CommentData[];
+  setComments: (comments: CommentData[]) => void;
 };
 
-const PostNav = ({ post, disableCommentBtn }: Props) => {
-  const { userVoted, postVotes, id, comments } = post;
+const CommentNav = ({ comment, comments, setComments }: Props) => {
+  const { userVoted, commentVotes, id, created_at } = comment;
 
   const ctx = useContext(context);
-  const [votes, setVotes] = useState(postVotes);
+  const [votes, setVotes] = useState(commentVotes);
   const [open, setOpen] = useState(false);
   const [jump, setJump] = useState(false);
 
   const patchVote = (vote: number | null) => {
-    fetch(`content/vote/${id}?vote=${vote}`, {
+    fetch(`content/commentsVote/${id}?vote=${vote}`, {
       method: "PATCH",
     });
   };
 
   const setUserVote = async (vote: number | null, incVotes: number) => {
-    ctx.setPosts(
-      ctx.posts.map((item) =>
-        item.post.id === id
+    setComments(
+      comments.map((item) =>
+        item.comment.id === id
           ? {
-              post: {
-                ...item.post,
+              comment: {
+                ...item.comment,
                 userVoted: vote,
-                postVotes: incVotes,
+                commentVotes: incVotes,
               },
               user: { ...item.user },
             }
@@ -73,13 +73,13 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
     setVotes(newVotes);
     setUserVote(vote, newVotes);
 
-    const data = await fetch("content/vote", {
+    const data = await fetch("content/commentsVote", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        post_id: id,
+        comment_id: id,
         user_id: ctx.user.id,
         vote: vote,
       }),
@@ -99,17 +99,17 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
         <div className="flex items-center justify-start gap-2">
           <IconButton sx={{ p: 1 }} onClick={() => handleVote(1)}>
             <ThumbUpIcon
-              className={userVoted === 1 ? "text-blue-700" : ""}
+              className={userVoted === 1 ? "text-blue-700" : "text-gray-400"}
               fontSize="medium"
             />
           </IconButton>
           <p
             className={`text-xl min-w-[1.25rem] flex justify-center  ${
               votes > 0
-                ? "text-blue-900"
+                ? "text-blue-500"
                 : votes < 0
                 ? "text-red-900"
-                : "text-gray-800"
+                : "text-gray-200"
             } ${jump ? "jump" : ""}`}
             onAnimationEnd={() => setJump(false)}
           >
@@ -117,25 +117,15 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
           </p>
           <IconButton sx={{ p: 1 }} onClick={() => handleVote(0)}>
             <ThumbDownIcon
-              className={userVoted === 0 ? "text-red-600" : ""}
+              className={userVoted === 0 ? "text-red-700" : "text-gray-400"}
               fontSize="medium"
             />
           </IconButton>
         </div>
         <div className="w-full gap-3 flex items-center justify-end">
-          {!disableCommentBtn && (
-            <Link
-              to={`/post/${id}`}
-              className="max-w-[400px] text-xs md:text-lg text-center bg-blue-200 text-gray-800 font-bold p-2  rounded-md hover:bg-blue-500 transition-all w-full"
-            >
-              <button>
-                <QuestionAnswerRoundedIcon sx={{ mr: 0.5 }} />
-                {comments === 1
-                  ? comments + " Comment"
-                  : comments + " Comments"}
-              </button>
-            </Link>
-          )}
+          <p className="text-xs md:text-sm w-fit whitespace-nowrap pt-1">
+            {created_at.split(" ")[0]}
+          </p>
         </div>
         <BasicModal open={open} setOpen={setOpen} />
       </div>
@@ -143,4 +133,4 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
   );
 };
 
-export default PostNav;
+export default CommentNav;

@@ -2,11 +2,14 @@ import { PostsUser } from "../context/Context";
 
 type Props = {
   user: PostsUser;
+  styles?: string;
 };
 
-const UserCard = ({ user }: Props) => {
+const UserCard = ({ user, styles }: Props) => {
   return (
-    <div className="flex flex-col flex-shrink-0 text-sm border-r-2 pr-3 justify-between items-center gap-2">
+    <div
+      className={`flex flex-col flex-shrink-0 text-sm border-r-2 pr-3 justify-between items-center gap-2 ${styles}`}
+    >
       <h2 className="font-bold">{user.username}</h2>
       <img
         src={user.avatar}

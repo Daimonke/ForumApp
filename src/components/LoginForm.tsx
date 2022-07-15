@@ -1,10 +1,11 @@
 import { Alert, CircularProgress } from "@mui/material";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { context } from "../context/Context";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -49,7 +50,12 @@ const LoginForm = () => {
         error: "",
         loading: false,
       });
-      navigate("/");
+      const lastPath = location.state as string;
+      if (lastPath) {
+        lastPath.includes("post/") ? navigate(lastPath) : navigate("/");
+      } else {
+        navigate("/");
+      }
     }
     ctx.setUpdate(!ctx.update);
   };

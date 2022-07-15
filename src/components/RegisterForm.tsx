@@ -1,9 +1,10 @@
 import { Alert, CircularProgress } from "@mui/material";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { context } from "../context/Context";
 
 const RegisterForm = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -18,6 +19,15 @@ const RegisterForm = () => {
     formData;
 
   const ctx = useContext(context);
+
+  const handleNavigate = () => {
+    const lastPath = location.state as string;
+    if (lastPath) {
+      lastPath.includes("post/") ? navigate(lastPath) : navigate("/");
+    } else {
+      navigate("/");
+    }
+  };
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     ctx.setUser(false);
@@ -56,6 +66,7 @@ const RegisterForm = () => {
         avatar: data.avatar,
       });
     }
+
     ctx.setUpdate(!ctx.update);
   };
 
@@ -120,11 +131,7 @@ const RegisterForm = () => {
           </Alert>
         )}
         {message && (
-          <Alert
-            className="w-[80%]"
-            severity="info"
-            onClose={() => navigate("/")}
-          >
+          <Alert className="w-[80%]" severity="info" onClose={handleNavigate}>
             {message}
           </Alert>
         )}
