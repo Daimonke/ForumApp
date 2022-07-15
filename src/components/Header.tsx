@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Container,
   LinearProgress,
@@ -47,12 +48,16 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
     () => [{ name: "Home", path: "/" }, { divider: true }],
     []
   );
+  const onlineLinks = useMemo(
+    () => [{ name: "New Post", path: "/newpost" }, { divider: true }],
+    []
+  );
 
   const [links, setLinks] = useState<Links>([...mainLinks, ...offlineLinks]);
 
   useEffect(() => {
     if (ctx.user) {
-      setLinks([...mainLinks]);
+      setLinks([...mainLinks, ...onlineLinks]);
     } else {
       setLinks([...mainLinks, ...offlineLinks]);
     }

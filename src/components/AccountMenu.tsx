@@ -4,7 +4,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { context } from "../context/Context";
 import Arrows from "@mui/icons-material/KeyboardDoubleArrowDown";
 import { CircularProgress } from "@mui/material";
-import userEvent from "@testing-library/user-event";
 
 type Props = {
   classes?: string;

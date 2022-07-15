@@ -9,7 +9,7 @@ type Props = {
 };
 
 const PostCard = ({ item }: Props) => {
-  const { title, content, created_at, user_id } = item.post;
+  const { title, content, created_at } = item.post;
   return (
     <div className="flex gap-4 p-3 rounded-md bg-gradient-to-t from-gray-400/70 to-white/70 text-black">
       <UserCard user={item.user} />

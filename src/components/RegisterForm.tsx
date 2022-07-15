@@ -104,7 +104,7 @@ const RegisterForm = () => {
         />
         <input
           type="submit"
-          value="Signup"
+          value="SIGNUP"
           className="cursor-pointer min-w-fit w-[80%] py-2 px-2 border-b-2 font-bold border-blue-600 rounded-md shadow-md shadow-blue-800 
             transition-all duration-200 text-gray-900 text-lg bg-blue-300 hover:bg-blue-400 hover:border-blue-800"
           disabled={loading}

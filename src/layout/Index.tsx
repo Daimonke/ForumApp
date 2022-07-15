@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import NewPost from "../pages/NewPost";
+import Post from "../pages/Post";
 import Register from "../pages/Register";
 
 const Index = () => {
@@ -36,6 +39,8 @@ const Index = () => {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/newpost" element={<NewPost />} />
+          <Route path="/post/:id" element={<Post />} />
         </Routes>
       </div>
       <Footer />

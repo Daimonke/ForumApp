@@ -1,4 +1,3 @@
-import { Skeleton } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import PostSkeleton from "../components/PostSkeleton";

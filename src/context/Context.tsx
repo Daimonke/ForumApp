@@ -10,7 +10,7 @@ export type PostsPost = {
   created_at: string;
   user_id: number;
   postVotes: number;
-  userVoted: number | null;
+  userVoted: number | null | false;
 };
 
 export type PostsUser = {
@@ -78,7 +78,6 @@ const Context = ({ children }: Props) => {
     if (postsJson.success) {
       setPosts(postsJson.posts);
     }
-    console.log(postsJson);
   };
 
   useEffect(() => {
