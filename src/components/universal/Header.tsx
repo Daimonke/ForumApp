@@ -8,10 +8,10 @@ import {
 import { useContext, useEffect, useMemo } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { context } from "../context/Context";
-import logo from "../images/logo.png";
-import DesktopNav from "./DesktopNav";
-import MobileNav from "./MobileNav";
+import { context } from "../../context/Context";
+import logo from "../../images/logo.png";
+import DesktopNav from "../navigation/DesktopNav";
+import MobileNav from "../navigation/MobileNav";
 
 type Links = (
   | {

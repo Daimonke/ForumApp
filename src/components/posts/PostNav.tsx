@@ -2,10 +2,10 @@ import React, { useContext, useState } from "react";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { IconButton } from "@mui/material";
-import { context, PostsPost } from "../context/Context";
 import { Link } from "react-router-dom";
-import BasicModal from "./BasicModal";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
+import { context, PostsPost } from "../../context/Context";
+import BasicModal from "../universal/BasicModal";
 
 type Props = {
   post: PostsPost;

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { context } from "../context/Context";
+import { context } from "../../context/Context";
 import AnswerCard from "./CommentCard";
 import CommentBar from "./CommentBar";
-import PostSkeleton from "./PostSkeleton";
+import PostSkeleton from "../posts/PostSkeleton";
 
 export type CommentData = {
   comment: {

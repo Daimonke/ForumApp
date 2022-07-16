@@ -1,9 +1,9 @@
 import { Divider } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { PostsData } from "../context/Context";
+import { PostsData } from "../../context/Context";
+import UserCard from "../auth/UserCard";
 import PostNav from "./PostNav";
-import UserCard from "./UserCard";
 
 type Props = {
   item: PostsData;

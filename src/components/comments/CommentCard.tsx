@@ -1,7 +1,7 @@
 import { Divider } from "@mui/material";
+import UserCard from "../auth/UserCard";
 import CommentNav from "./CommentNav";
 import { CommentData } from "./CommentsBody";
-import UserCard from "./UserCard";
 
 type Props = {
   data: CommentData;

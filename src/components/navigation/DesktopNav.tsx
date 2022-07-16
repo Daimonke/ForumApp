@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { context } from "../context/Context";
+import { context } from "../../context/Context";
 import AccountMenu from "./AccountMenu";
 
 type Props = {

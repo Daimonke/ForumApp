@@ -1,7 +1,7 @@
 import { Alert, CircularProgress } from "@mui/material";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { context } from "../context/Context";
+import { context } from "../../context/Context";
 
 const PostForm = () => {
   const navigate = useNavigate();

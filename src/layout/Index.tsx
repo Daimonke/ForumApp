@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../components/universal/Footer";
+import Header from "../components/universal/Header";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NewPost from "../pages/NewPost";

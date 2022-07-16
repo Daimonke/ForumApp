@@ -1,4 +1,4 @@
-import { PostsUser } from "../context/Context";
+import { PostsUser } from "../../context/Context";
 
 type Props = {
   user: PostsUser;

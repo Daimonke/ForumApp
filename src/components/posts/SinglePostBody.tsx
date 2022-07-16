@@ -1,7 +1,7 @@
 import { Divider } from "@mui/material";
-import { PostsData } from "../context/Context";
+import { PostsData } from "../../context/Context";
+import UserCard from "../auth/UserCard";
 import PostNav from "./PostNav";
-import UserCard from "./UserCard";
 
 type Props = {
   post: PostsData;

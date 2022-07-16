@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { createTextChangeRange } from "typescript";
-import { context } from "../context/Context";
-import BasicModal from "./BasicModal";
+import { context } from "../../context/Context";
+import BasicModal from "../universal/BasicModal";
 import { CommentData } from "./CommentsBody";
 
 type Props = {

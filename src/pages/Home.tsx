@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import PostCard from "../components/PostCard";
-import PostSkeleton from "../components/PostSkeleton";
+import PostCard from "../components/posts/PostCard";
+import PostSkeleton from "../components/posts/PostSkeleton";
 import { context, PostsData } from "../context/Context";
 
 const Home = () => {

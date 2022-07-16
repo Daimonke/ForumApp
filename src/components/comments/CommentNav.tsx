@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { IconButton } from "@mui/material";
-import { context } from "../context/Context";
-import BasicModal from "./BasicModal";
+import { context } from "../../context/Context";
+import BasicModal from "../universal/BasicModal";
 import { CommentData } from "./CommentsBody";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 

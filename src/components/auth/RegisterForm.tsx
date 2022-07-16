@@ -1,7 +1,7 @@
-import { Alert, CircularProgress, Collapse, IconButton } from "@mui/material";
+import { Alert, Collapse, IconButton } from "@mui/material";
 import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { context } from "../context/Context";
+import { context } from "../../context/Context";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const RegisterForm = () => {
@@ -31,8 +31,22 @@ const RegisterForm = () => {
   };
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    ctx.setUser(false);
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setFormData({
+        ...formData,
+        error: "Passwords do not match",
+      });
+      return;
+    }
+    if (username.length < 4 || password.length < 4) {
+      setFormData({
+        ...formData,
+        error: "Username and password must be at least 4 characters",
+      });
+      return;
+    }
+    ctx.setUser(false);
     setFormData({ ...formData, loading: true });
     const url = `auth/register`;
     const options = {

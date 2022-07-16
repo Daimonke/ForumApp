@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CommentsBody from "../components/CommentsBody";
-import SinglePostBody from "../components/SinglePostBody";
+import CommentsBody from "../components/comments/CommentsBody";
+import SinglePostBody from "../components/posts/SinglePostBody";
 import { context, PostsData } from "../context/Context";
 
 const Post = () => {

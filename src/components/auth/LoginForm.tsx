@@ -1,7 +1,7 @@
 import { Alert, Collapse, IconButton } from "@mui/material";
 import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { context } from "../context/Context";
+import { context } from "../../context/Context";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const LoginForm = () => {
@@ -20,6 +20,14 @@ const LoginForm = () => {
 
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (username.length < 4 || password.length < 4) {
+      setFormData({
+        ...formData,
+        error: "Invalid username or password",
+      });
+      return;
+    }
+
     ctx.setUser(false);
     setFormData({ ...formData, loading: true });
     const url = `auth/login`;
