@@ -1,7 +1,8 @@
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert, CircularProgress, Collapse, IconButton } from "@mui/material";
 import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { context } from "../context/Context";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const RegisterForm = () => {
   const location = useLocation();
@@ -64,6 +65,7 @@ const RegisterForm = () => {
         id: data.id,
         username: data.username,
         avatar: data.avatar,
+        userPostsCount: data.userPostsCount,
       });
     }
 
@@ -120,21 +122,44 @@ const RegisterForm = () => {
             transition-all duration-200 text-gray-900 text-lg bg-blue-300 hover:bg-blue-400 hover:border-blue-800"
           disabled={loading}
         />
-        {loading && <CircularProgress />}
-        {error && (
-          <Alert
-            className="w-[80%]"
-            severity="error"
-            onClose={() => setFormData({ ...formData, error: "" })}
-          >
-            {error}
-          </Alert>
-        )}
-        {message && (
-          <Alert className="w-[80%]" severity="info" onClose={handleNavigate}>
-            {message}
-          </Alert>
-        )}
+        <div className="w-[80%]">
+          <Collapse in={!!error}>
+            <Alert
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setFormData({ ...formData, error: "" });
+                  }}
+                >
+                  <CloseRoundedIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {error}
+            </Alert>
+          </Collapse>
+          <Collapse in={!!message}>
+            <Alert
+              severity="success"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={handleNavigate}
+                >
+                  <CloseRoundedIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {message}
+            </Alert>
+          </Collapse>
+        </div>
       </form>
     </>
   );

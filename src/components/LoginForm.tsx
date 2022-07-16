@@ -1,7 +1,8 @@
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert, Collapse, IconButton } from "@mui/material";
 import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { context } from "../context/Context";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ const LoginForm = () => {
         id: data.id,
         username: data.username,
         avatar: data.avatar,
+        userPostsCount: data.userPostsCount,
       });
       setFormData({
         username: "",
@@ -99,16 +101,26 @@ const LoginForm = () => {
             transition-all duration-200 text-gray-900 text-lg bg-blue-300 hover:bg-blue-400 hover:border-blue-800"
           disabled={loading}
         />
-        {loading && <CircularProgress />}
-        {error && (
+        <Collapse in={!!error} sx={{ width: "80%" }}>
           <Alert
-            className="w-[80%]"
             severity="error"
-            onClose={() => setFormData({ ...formData, error: "" })}
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setFormData({ ...formData, error: "" });
+                }}
+              >
+                <CloseRoundedIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ width: "100%" }}
           >
             {error}
           </Alert>
-        )}
+        </Collapse>
       </form>
     </>
   );

@@ -5,6 +5,7 @@ import { IconButton } from "@mui/material";
 import { context } from "../context/Context";
 import BasicModal from "./BasicModal";
 import { CommentData } from "./CommentsBody";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 
 type Props = {
   comment: CommentData["comment"];
@@ -13,7 +14,7 @@ type Props = {
 };
 
 const CommentNav = ({ comment, comments, setComments }: Props) => {
-  const { userVoted, commentVotes, id, created_at } = comment;
+  const { userVoted, commentVotes, id, created_at, user_id } = comment;
 
   const ctx = useContext(context);
   const [votes, setVotes] = useState(commentVotes);
@@ -123,6 +124,11 @@ const CommentNav = ({ comment, comments, setComments }: Props) => {
           </IconButton>
         </div>
         <div className="w-full gap-3 flex items-center justify-end">
+          {ctx.user && ctx.user.id === user_id && (
+            <IconButton sx={{ p: 1 }} onClick={() => {}}>
+              <SettingsRoundedIcon className="text-green-600" />
+            </IconButton>
+          )}
           <p className="text-xs md:text-sm w-fit whitespace-nowrap pt-1">
             {created_at.split(" ")[0]}
           </p>

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import AnswerCard from "./AnswerCard";
+import { context } from "../context/Context";
+import AnswerCard from "./CommentCard";
 import CommentBar from "./CommentBar";
+import PostSkeleton from "./PostSkeleton";
 
 export type CommentData = {
   comment: {
@@ -23,17 +25,23 @@ export type CommentData = {
 
 const CommentsBody = () => {
   const [comments, setComments] = useState<CommentData[]>([]);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const ctx = useContext(context);
 
   useEffect(() => {
     fetch(`content/comments/${id}`)
       .then((res) => res.json())
-      .then((data) => setComments(data.data));
-  }, [id]);
+      .then((data) => setComments(data.data))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  }, [id, ctx.user]);
 
   return (
-    <div className="">
-      <CommentBar />
+    <div className="flex flex-col gap-3">
+      <CommentBar comments={comments} setComments={setComments} />
+      {loading &&
+        Array.from({ length: 5 }).map((_, i) => <PostSkeleton key={i} />)}
       {comments.map((comment) => (
         <AnswerCard
           key={comment.comment.id}

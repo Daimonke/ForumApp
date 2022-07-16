@@ -51,14 +51,14 @@ export default function BasicModal({ open, setOpen }: Props) {
           <Link to="/login" state={location} className="text-blue-500">
             LOGIN
           </Link>{" "}
-          to vote!
+          to do that!
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           Or{" "}
           <Link to="/register" state={location} className="text-green-500">
-            JOIN
+            SIGNUP
           </Link>{" "}
-          our community to vote on the best posts!
+          to join this awesome community!
         </Typography>
       </Box>
     </Modal>

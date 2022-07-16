@@ -27,17 +27,19 @@ export default function AccountMenu({ classes, mobile }: Props) {
   };
 
   const logout = () => {
-    ctx.setUser(false);
     handleClose();
     setLoading(true);
-    fetch("/auth/logout")
-      .then(() => {
-        ctx.setUser(null);
-      })
-      .finally(() => {
-        setLoading(false);
-        ctx.setUpdate(!ctx.update);
-      });
+    ctx.setUser(false);
+    ctx.setPosts(
+      ctx.posts.map((item) => ({
+        post: { ...item.post, userVoted: null },
+        user: { ...item.user },
+      }))
+    );
+    fetch("/auth/logout").finally(() => {
+      ctx.setUser(null);
+      setLoading(false);
+    });
   };
 
   return (

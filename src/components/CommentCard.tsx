@@ -9,13 +9,13 @@ type Props = {
   setComments: (comments: CommentData[]) => void;
 };
 
-const AnswerCard = ({ data, comments, setComments }: Props) => {
-  const { comment, created_at } = data.comment;
+const CommentCard = ({ data, comments, setComments }: Props) => {
+  const { comment } = data.comment;
 
   return (
     <div className="shadow-md shadow-blue-300 flex gap-4 p-3 rounded-md bg-gradient-to-t from-black/60 to-gray-600/60 text-gray-100">
-      <UserCard user={data.user} />
-      <div className="flex flex-col w-full overflow-hidden relative">
+      <UserCard user={data.user} styles={"!justify-start"} />
+      <div className="flex justify-start flex-col w-full overflow-hidden relative">
         <div className="h-full">
           <p className="my-2">{comment}</p>
         </div>
@@ -30,4 +30,4 @@ const AnswerCard = ({ data, comments, setComments }: Props) => {
   );
 };
 
-export default AnswerCard;
+export default CommentCard;

@@ -30,6 +30,7 @@ type User = {
   id: number;
   username: string;
   avatar: string;
+  userPostsCount: number;
 };
 
 type Ctx = {
@@ -67,6 +68,7 @@ const Context = ({ children }: Props) => {
         id: userJson.id,
         username: userJson.username,
         avatar: userJson.avatar,
+        userPostsCount: userJson.userPostsCount,
       });
     } else {
       setUser(null);
