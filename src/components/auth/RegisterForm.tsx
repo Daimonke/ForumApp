@@ -53,6 +53,7 @@ const RegisterForm = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Allow-credentials": "true",
       },
       body: JSON.stringify({ username, password, confirmPassword }),
     });
