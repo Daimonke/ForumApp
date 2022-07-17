@@ -82,8 +82,10 @@ const RegisterForm = () => {
         avatar: data.avatar,
         userPostsCount: data.userPostsCount,
       });
+      setTimeout(() => {
+        handleNavigate();
+      }, 1500);
     }
-
     ctx.setUpdate(!ctx.update);
   };
 

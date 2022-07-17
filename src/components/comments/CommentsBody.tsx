@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { context } from "../../context/Context";
-import AnswerCard from "./CommentCard";
+import CommentCard from "./CommentCard";
 import CommentBar from "./CommentBar";
 import PostSkeleton from "../posts/PostSkeleton";
 import URL from "../../uri";
@@ -54,7 +54,7 @@ const CommentsBody = ({ commentsCount }: Props) => {
           <PostSkeleton key={i} />
         ))}
       {comments.map((comment) => (
-        <AnswerCard
+        <CommentCard
           key={comment.comment.id}
           data={comment}
           comments={comments}

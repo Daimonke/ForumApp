@@ -122,7 +122,9 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
           ) : !md && !isVisible ? (
             <MobileNav
               links={links}
-              classes={"fixed z-10 top-4 right-5 !text-blue-200 fadeIn"}
+              classes={
+                "fixed z-10 top-4 right-5 !text-green-500 fadeIn border-2 border-black bg-black/60 rounded-md"
+              }
             />
           ) : null}
         </div>

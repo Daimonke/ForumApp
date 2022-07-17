@@ -7,11 +7,12 @@ import { IconButton } from "@mui/material";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  maxWidth: "500px",
+  width: { xs: "80%", sm: "60%", md: "40%", lg: "30%" },
   bgcolor: "black",
   border: "2px solid #7390E1",
   borderRadius: "8px",

@@ -1,4 +1,5 @@
 import { Divider } from "@mui/material";
+import { useState } from "react";
 import UserCard from "../auth/UserCard";
 import CommentNav from "./CommentNav";
 import { CommentData } from "./CommentsBody";
@@ -11,9 +12,10 @@ type Props = {
 
 const CommentCard = ({ data, comments, setComments }: Props) => {
   const { comment } = data.comment;
+  const [editingMode, setEditingMode] = useState(false);
 
   return (
-    <div className="shadow-md shadow-blue-300 flex gap-4 p-3 rounded-md bg-gradient-to-t from-black/60 to-gray-600/60 text-gray-100">
+    <div className="shadow-md shadow-black flex gap-4 p-3 rounded-md bg-gradient-to-t from-black/60 to-gray-600/60 text-gray-100">
       <UserCard user={data.user} styles={"!justify-start"} />
       <div className="flex justify-start flex-col w-full overflow-hidden relative">
         <div className="h-full">
@@ -24,6 +26,7 @@ const CommentCard = ({ data, comments, setComments }: Props) => {
           comment={data.comment}
           comments={comments}
           setComments={setComments}
+          setEditingMode={setEditingMode}
         />
       </div>
     </div>
