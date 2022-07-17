@@ -68,7 +68,7 @@ const CommentCard = ({ data, comments, setComments }: Props) => {
       setComments(oldComments);
     }
   };
-
+  
   return (
     <div className="shadow-md shadow-black flex gap-4 p-3 rounded-md bg-gradient-to-t from-black/60 to-gray-600/60 text-gray-100">
       <UserCard user={data.user} styles={"!justify-start"} />
