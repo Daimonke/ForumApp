@@ -4,6 +4,7 @@ import { context } from "../../context/Context";
 import AnswerCard from "./CommentCard";
 import CommentBar from "./CommentBar";
 import PostSkeleton from "../posts/PostSkeleton";
+import URL from "../../uri";
 
 export type CommentData = {
   comment: {
@@ -30,7 +31,9 @@ const CommentsBody = () => {
   const ctx = useContext(context);
 
   useEffect(() => {
-    fetch(`content/comments/${id}`)
+    fetch(`${URL}/content/comments/${id}`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => setComments(data.data))
       .catch((err) => console.log(err))

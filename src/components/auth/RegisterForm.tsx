@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { context } from "../../context/Context";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import URL from "../../uri";
 
 const RegisterForm = () => {
   const location = useLocation();
@@ -48,15 +49,14 @@ const RegisterForm = () => {
     }
     ctx.setUser(false);
     setFormData({ ...formData, loading: true });
-    const url = `auth/register`;
-    const options = {
+    const response = await fetch(`${URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ username, password, confirmPassword }),
-    };
-    const response = await fetch(url, options);
+    });
     const data = await response.json();
     if (data.success === false) {
       setFormData({

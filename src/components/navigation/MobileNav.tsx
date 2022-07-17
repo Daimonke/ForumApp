@@ -33,7 +33,7 @@ const MobileNav = ({ links, classes }: Props) => {
 
   const handleClick = (path: string) => {
     setOpen(false);
-    navigate(path);
+    navigate(path, { state: location });
   };
 
   useEffect(() => {

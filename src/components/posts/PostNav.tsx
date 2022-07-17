@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
 import { context, PostsPost } from "../../context/Context";
 import BasicModal from "../universal/BasicModal";
+import URL from "../../uri";
 
 type Props = {
   post: PostsPost;
@@ -21,8 +22,9 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
   const [jump, setJump] = useState(false);
 
   const patchVote = (vote: number | null) => {
-    fetch(`content/vote/${id}?vote=${vote}`, {
+    fetch(`${URL}/content/vote/${id}?vote=${vote}`, {
       method: "PATCH",
+      credentials: "include",
     });
   };
 
@@ -73,11 +75,12 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
     setVotes(newVotes);
     setUserVote(vote, newVotes);
 
-    const data = await fetch("content/vote", {
+    const data = await fetch(`${URL}/content/vote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         post_id: id,
         user_id: ctx.user.id,
@@ -117,7 +120,7 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
           </p>
           <IconButton sx={{ p: 1 }} onClick={() => handleVote(0)}>
             <ThumbDownIcon
-              className={userVoted === 0 ? "text-red-600" : ""}
+              className={userVoted === 0 ? "text-red-700" : ""}
               fontSize="medium"
             />
           </IconButton>

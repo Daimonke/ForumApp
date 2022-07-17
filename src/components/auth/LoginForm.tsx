@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { context } from "../../context/Context";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import URL from "../../uri";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -30,15 +31,14 @@ const LoginForm = () => {
 
     ctx.setUser(false);
     setFormData({ ...formData, loading: true });
-    const url = `auth/login`;
-    const options = {
+    const response = await fetch(`${URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ username, password }),
-    };
-    const response = await fetch(url, options);
+    });
     const data = await response.json();
     if (data.success === false) {
       setFormData({

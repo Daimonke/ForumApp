@@ -2,6 +2,7 @@ import { Alert, CircularProgress } from "@mui/material";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { context } from "../../context/Context";
+import URL from "../../uri";
 
 const PostForm = () => {
   const navigate = useNavigate();
@@ -19,11 +20,12 @@ const PostForm = () => {
   const sendForm = async (e: React.FormEvent<HTMLFormElement>) => {
     setFormData({ ...formData, loading: true });
     e.preventDefault();
-    const data = await fetch("content/posts", {
+    const data = await fetch(`${URL}/content/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ title, content }),
     });
     const dataJson = await data.json();

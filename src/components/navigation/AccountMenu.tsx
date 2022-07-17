@@ -4,6 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { context } from "../../context/Context";
 import Arrows from "@mui/icons-material/KeyboardDoubleArrowDown";
 import { CircularProgress } from "@mui/material";
+import URL from "../../uri";
 
 type Props = {
   classes?: string;
@@ -36,7 +37,9 @@ export default function AccountMenu({ classes, mobile }: Props) {
         user: { ...item.user },
       }))
     );
-    fetch("/auth/logout").finally(() => {
+    fetch(`${URL}/auth/logout`, {
+      credentials: "include",
+    }).finally(() => {
       ctx.setUser(null);
       setLoading(false);
     });

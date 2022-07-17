@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { context } from "../../context/Context";
+import URL from "../../uri";
 import BasicModal from "../universal/BasicModal";
 import { CommentData } from "./CommentsBody";
 
@@ -17,11 +18,12 @@ const CommentBar = ({ comments, setComments }: Props) => {
   const handleComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!ctx.user) return setOpen(true);
-    const response = await fetch("/content/comments", {
+    const response = await fetch(`${URL}/content/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         comment: comment,
         user_id: ctx.user.id,

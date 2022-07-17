@@ -6,6 +6,7 @@ import { context } from "../../context/Context";
 import BasicModal from "../universal/BasicModal";
 import { CommentData } from "./CommentsBody";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import URL from "../../uri";
 
 type Props = {
   comment: CommentData["comment"];
@@ -22,8 +23,9 @@ const CommentNav = ({ comment, comments, setComments }: Props) => {
   const [jump, setJump] = useState(false);
 
   const patchVote = (vote: number | null) => {
-    fetch(`content/commentsVote/${id}?vote=${vote}`, {
+    fetch(`${URL}/content/commentsVote/${id}?vote=${vote}`, {
       method: "PATCH",
+      credentials: "include",
     });
   };
 

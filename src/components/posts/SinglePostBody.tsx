@@ -15,13 +15,15 @@ const SinglePostBody = ({ post }: Props) => {
       <UserCard user={post.user} styles={"!justify-start"} />
       <div className="flex flex-col overflow-hidden w-full justify-between">
         <div className="flex justify-between items-start gap-2">
-          <h1 className="text-xl font-bold text-ellipsis overflow-hidden line-clamp-2">
+          <h1 className="text-2xl font-bold text-ellipsis overflow-hidden line-clamp-2">
             {title}
           </h1>
           <p className="text-xs md:text-sm w-fit whitespace-nowrap pt-1">
             {created_at.split(" ")[0]}
           </p>
         </div>
+        <Divider className="bg-blue-300 h-[2px]" />
+
         <div className="h-full">
           <p className="my-2">{content}</p>
         </div>

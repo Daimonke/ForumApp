@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import URL from "../uri";
 
 type Props = {
   children: React.ReactNode;
@@ -61,8 +62,12 @@ const Context = ({ children }: Props) => {
   const [update, setUpdate] = useState(initialValue.update);
 
   const getUser = async () => {
-    const user = await fetch("/auth/verifyUser");
+    const user = await fetch(`${URL}/auth/verifyUser`, {
+      credentials: "include",
+    });
+
     const userJson = await user.json();
+    console.log(userJson);
     if (userJson.success) {
       setUser({
         id: userJson.id,
@@ -76,7 +81,9 @@ const Context = ({ children }: Props) => {
   };
 
   const getPosts = async () => {
-    const posts = await fetch("content/posts");
+    const posts = await fetch(`${URL}/content/posts`, {
+      credentials: "include",
+    });
     const postsJson = await posts.json();
     if (postsJson.success) {
       setPosts(postsJson.posts);
