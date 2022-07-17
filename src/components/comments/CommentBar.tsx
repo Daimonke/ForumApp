@@ -31,7 +31,6 @@ const CommentBar = ({ comments, setComments }: Props) => {
       }),
     });
     const data = await response.json();
-    console.log(data);
     if (data.success === true) {
       setComments([
         ...comments,
@@ -53,8 +52,22 @@ const CommentBar = ({ comments, setComments }: Props) => {
           },
         },
       ]);
+      ctx.setPosts(
+        ctx.posts.map((post) =>
+          post.post.id === Number(id)
+            ? {
+                post: {
+                  ...post.post,
+                  comments: post.post.comments + 1,
+                },
+                user: {
+                  ...post.user,
+                },
+              }
+            : post
+        )
+      );
       setComment("");
-    } else {
     }
   };
 

@@ -68,7 +68,6 @@ const Context = ({ children }: Props) => {
       },
     });
     const userJson = await user.json();
-    console.log(userJson);
     if (userJson.success) {
       setUser({
         id: userJson.id,

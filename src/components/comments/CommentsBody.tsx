@@ -24,7 +24,11 @@ export type CommentData = {
   };
 };
 
-const CommentsBody = () => {
+type Props = {
+  commentsCount: Number;
+};
+
+const CommentsBody = ({ commentsCount }: Props) => {
   const [comments, setComments] = useState<CommentData[]>([]);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -46,7 +50,9 @@ const CommentsBody = () => {
     <div className="flex flex-col gap-3">
       <CommentBar comments={comments} setComments={setComments} />
       {loading &&
-        Array.from({ length: 5 }).map((_, i) => <PostSkeleton key={i} />)}
+        Array.from({ length: Number(commentsCount) }).map((_, i) => (
+          <PostSkeleton key={i} />
+        ))}
       {comments.map((comment) => (
         <AnswerCard
           key={comment.comment.id}

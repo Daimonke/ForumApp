@@ -14,8 +14,12 @@ const Post = () => {
   }, [ctx.posts, id]);
   return (
     <div className="max-w-5xl m-auto flex flex-col p-3 md:p-5">
-      {post && <SinglePostBody post={post} />}
-      <CommentsBody />
+      {post && (
+        <>
+          <SinglePostBody post={post} />
+          <CommentsBody commentsCount={post.post.comments} />
+        </>
+      )}
     </div>
   );
 };
