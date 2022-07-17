@@ -1,18 +1,14 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import Context from "./Context";
-import Home from "./pages/Home";
+import { HashRouter } from "react-router-dom";
+import Context from "./context/Context";
+import Index from "./layout/Index";
 
 function App() {
   return (
     <Context>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      {/* HashRouter for Github-pages and package.json "proxy" bug */}
+      <HashRouter>
+        <Index />
+      </HashRouter>
     </Context>
   );
 }
