@@ -17,10 +17,14 @@ const Index = () => {
 
   const pageAnimation = () => {
     if (transition === "remove") {
+      setIsVisible(true);
       setDisplayLocation(location);
       setTransition("show");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setIsVisible(true);
+      if (window.scrollY > 0) {
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 150);
+      }
     }
   };
 

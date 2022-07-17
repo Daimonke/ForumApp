@@ -30,6 +30,20 @@ img {
   
 }
 
+.grayShadow {
+  background: #aaaaaa;
+  border-radius: 10px;
+  box-shadow: inset 6px 6px 16px #8d8d8d,
+            inset -6px -6px 16px #c7c7c7;
+}
+
+.darkShadow {
+border-radius: 20px;
+background: #01153d;
+box-shadow: inset 16px 16px 31px #011133,
+            inset -16px -16px 31px #011947;
+}
+
 .page {
   overflow: hidden;
   scroll-behavior: smooth;
@@ -45,7 +59,7 @@ img {
 }
 
 .fadeIn {
-  animation: 0.5s fadeIn forwards;
+  animation: 0.3s fadeIn forwards;
 }
 
 .growAnimation {

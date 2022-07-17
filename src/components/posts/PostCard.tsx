@@ -26,7 +26,7 @@ const PostCard = ({ item }: Props) => {
 
   return (
     <div
-      className="cursor-pointer shadow-md shadow-blue-300 flex gap-4 p-3 rounded-md bg-gradient-to-t from-gray-400/70 to-white/70 text-black border-2 border-white/0 hover:border-white/70"
+      className="cursor-pointer grayShadow flex gap-4 p-3 rounded-md bg-gradient-to-t from-gray-400/70 to-white/80 text-black border-2 border-white/0 hover:border-white/70"
       onClick={handleClick}
     >
       <UserCard user={item.user} />

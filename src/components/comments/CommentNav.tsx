@@ -5,16 +5,22 @@ import { IconButton } from "@mui/material";
 import { context } from "../../context/Context";
 import BasicModal from "../universal/BasicModal";
 import { CommentData } from "./CommentsBody";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import URL from "../../uri";
+import SettingsMenu from "./SettingsMenu";
 
 type Props = {
   comment: CommentData["comment"];
   comments: CommentData[];
   setComments: (comments: CommentData[]) => void;
+  setEditingMode: (mode: boolean) => void;
 };
 
-const CommentNav = ({ comment, comments, setComments }: Props) => {
+const CommentNav = ({
+  comment,
+  comments,
+  setComments,
+  setEditingMode,
+}: Props) => {
   const { userVoted, commentVotes, id, created_at, user_id } = comment;
 
   const ctx = useContext(context);
@@ -130,9 +136,12 @@ const CommentNav = ({ comment, comments, setComments }: Props) => {
         </div>
         <div className="w-full gap-3 flex items-center justify-end">
           {ctx.user && ctx.user.id === user_id && (
-            <IconButton sx={{ p: 0 }} onClick={() => {}}>
-              <SettingsRoundedIcon className="text-green-600" />
-            </IconButton>
+            <SettingsMenu
+              setEditingMode={setEditingMode}
+              comment_id={id}
+              comments={comments}
+              setComments={setComments}
+            />
           )}
           <p className="text-xs md:text-sm w-fit whitespace-nowrap pt-1">
             {created_at.split(" ")[0]}
