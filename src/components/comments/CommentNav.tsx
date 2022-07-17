@@ -100,7 +100,7 @@ const CommentNav = ({ comment, comments, setComments }: Props) => {
     <>
       <div className="flex items-center justify-between gap-5 mt-2">
         <div className="flex items-center justify-start gap-2">
-          <IconButton sx={{ p: 1 }} onClick={() => handleVote(1)}>
+          <IconButton sx={{ p: 0 }} onClick={() => handleVote(1)}>
             <ThumbUpIcon
               className={userVoted === 1 ? "text-blue-700" : "text-gray-400"}
               fontSize="medium"
@@ -118,7 +118,7 @@ const CommentNav = ({ comment, comments, setComments }: Props) => {
           >
             {votes}
           </p>
-          <IconButton sx={{ p: 1 }} onClick={() => handleVote(0)}>
+          <IconButton sx={{ p: 0 }} onClick={() => handleVote(0)}>
             <ThumbDownIcon
               className={userVoted === 0 ? "text-red-700" : "text-gray-400"}
               fontSize="medium"
@@ -127,7 +127,7 @@ const CommentNav = ({ comment, comments, setComments }: Props) => {
         </div>
         <div className="w-full gap-3 flex items-center justify-end">
           {ctx.user && ctx.user.id === user_id && (
-            <IconButton sx={{ p: 1 }} onClick={() => {}}>
+            <IconButton sx={{ p: 0 }} onClick={() => {}}>
               <SettingsRoundedIcon className="text-green-600" />
             </IconButton>
           )}
