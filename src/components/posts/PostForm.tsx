@@ -24,8 +24,8 @@ const PostForm = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      credentials: "include",
       body: JSON.stringify({ title, content }),
     });
     const dataJson = await data.json();

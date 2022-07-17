@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import { IconButton } from "@mui/material";
+import { IconButton, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
 import { context, PostsPost } from "../../context/Context";
@@ -16,6 +16,8 @@ type Props = {
 const PostNav = ({ post, disableCommentBtn }: Props) => {
   const { userVoted, postVotes, id, comments } = post;
 
+  const xs = useMediaQuery("(max-width: 400px)");
+
   const ctx = useContext(context);
   const [votes, setVotes] = useState(postVotes);
   const [open, setOpen] = useState(false);
@@ -24,7 +26,9 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
   const patchVote = (vote: number | null) => {
     fetch(`${URL}/content/vote/${id}?vote=${vote}`, {
       method: "PATCH",
-      credentials: "include",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
   };
 
@@ -79,8 +83,8 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      credentials: "include",
       body: JSON.stringify({
         post_id: id,
         user_id: ctx.user.id,
@@ -100,7 +104,7 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
     <>
       <div className="flex items-center justify-between gap-5 mt-2">
         <div className="flex items-center justify-start gap-2">
-          <IconButton sx={{ p: 1 }} onClick={() => handleVote(1)}>
+          <IconButton sx={{ p: 0 }} onClick={() => handleVote(1)}>
             <ThumbUpIcon
               className={userVoted === 1 ? "text-blue-700" : ""}
               fontSize="medium"
@@ -118,7 +122,7 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
           >
             {votes}
           </p>
-          <IconButton sx={{ p: 1 }} onClick={() => handleVote(0)}>
+          <IconButton sx={{ p: 0 }} onClick={() => handleVote(0)}>
             <ThumbDownIcon
               className={userVoted === 0 ? "text-red-700" : ""}
               fontSize="medium"
@@ -129,11 +133,13 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
           {!disableCommentBtn && (
             <Link
               to={`/post/${id}`}
-              className="max-w-[400px] text-xs md:text-lg text-center bg-blue-200 text-gray-800 font-bold p-2  rounded-md hover:bg-blue-500 transition-all w-full"
+              className="max-w-[400px] text-xs md:text-[1rem] text-center bg-blue-200 text-gray-800 font-bold p-2  rounded-md hover:bg-blue-500 transition-all w-full"
             >
               <button>
                 <QuestionAnswerRoundedIcon sx={{ mr: 0.5 }} />
-                {comments === 1
+                {xs
+                  ? comments
+                  : comments === 1
                   ? comments + " Comment"
                   : comments + " Comments"}
               </button>
