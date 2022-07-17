@@ -36,6 +36,11 @@ export default function SettingsMenu({
     setAnchorEl(null);
   };
 
+  const handleEdit = () => {
+    setEditingMode(true);
+    handleClose();
+  };
+
   const handleDelete = async () => {
     setAnchorEl(null);
     const response = await fetch(`${URL}/content/comments/${comment_id}`, {
@@ -85,7 +90,7 @@ export default function SettingsMenu({
         }}
       >
         <MenuItem
-          onClick={handleClose}
+          onClick={handleEdit}
           className=" !text-green-600/90 !font-bold !flex gap-1 !px-2 hover:!bg-gray-900/60"
         >
           <HealingRoundedIcon className="text-green-500/90" />
