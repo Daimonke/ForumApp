@@ -36,6 +36,7 @@ const LoginForm = () => {
       headers: {
         "Content-Type": "application/json",
         "Allow-credentials": "true",
+        "Access-Control-Allow-Credentials": "true",
       },
       body: JSON.stringify({ username, password }),
     });
