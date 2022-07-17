@@ -26,7 +26,9 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
   const patchVote = (vote: number | null) => {
     fetch(`${URL}/content/vote/${id}?vote=${vote}`, {
       method: "PATCH",
-      credentials: "include",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
   };
 
@@ -81,8 +83,8 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      credentials: "include",
       body: JSON.stringify({
         post_id: id,
         user_id: ctx.user.id,

@@ -25,7 +25,9 @@ const CommentNav = ({ comment, comments, setComments }: Props) => {
   const patchVote = (vote: number | null) => {
     fetch(`${URL}/content/commentsVote/${id}?vote=${vote}`, {
       method: "PATCH",
-      credentials: "include",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
   };
 
@@ -76,10 +78,11 @@ const CommentNav = ({ comment, comments, setComments }: Props) => {
     setVotes(newVotes);
     setUserVote(vote, newVotes);
 
-    const data = await fetch("content/commentsVote", {
+    const data = await fetch(`${URL}/content/commentsVote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
         comment_id: id,

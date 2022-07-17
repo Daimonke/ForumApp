@@ -36,7 +36,6 @@ const LoginForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
@@ -54,6 +53,7 @@ const LoginForm = () => {
         avatar: data.avatar,
         userPostsCount: data.userPostsCount,
       });
+      localStorage.setItem("token", data.token);
       setFormData({
         username: "",
         password: "",

@@ -22,8 +22,8 @@ const CommentBar = ({ comments, setComments }: Props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      credentials: "include",
       body: JSON.stringify({
         comment: comment,
         user_id: ctx.user.id,

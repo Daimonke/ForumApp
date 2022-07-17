@@ -37,12 +37,8 @@ export default function AccountMenu({ classes, mobile }: Props) {
         user: { ...item.user },
       }))
     );
-    fetch(`${URL}/auth/logout`, {
-      credentials: "include",
-    }).finally(() => {
-      ctx.setUser(null);
-      setLoading(false);
-    });
+    ctx.setUser(null);
+    setLoading(false);
   };
 
   return (

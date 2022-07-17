@@ -32,7 +32,9 @@ const CommentsBody = () => {
 
   useEffect(() => {
     fetch(`${URL}/content/comments/${id}`, {
-      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setComments(data.data))

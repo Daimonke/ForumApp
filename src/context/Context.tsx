@@ -63,9 +63,10 @@ const Context = ({ children }: Props) => {
 
   const getUser = async () => {
     const user = await fetch(`${URL}/auth/verifyUser`, {
-      credentials: "include",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
-
     const userJson = await user.json();
     console.log(userJson);
     if (userJson.success) {
@@ -82,7 +83,9 @@ const Context = ({ children }: Props) => {
 
   const getPosts = async () => {
     const posts = await fetch(`${URL}/content/posts`, {
-      credentials: "include",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
     const postsJson = await posts.json();
     if (postsJson.success) {

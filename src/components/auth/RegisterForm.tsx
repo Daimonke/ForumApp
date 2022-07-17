@@ -54,7 +54,6 @@ const RegisterForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify({ username, password, confirmPassword }),
     });
     const data = await response.json();
@@ -75,6 +74,7 @@ const RegisterForm = () => {
         message: data.message,
         loading: false,
       });
+      localStorage.setItem("token", data.token);
       ctx.setUser({
         id: data.id,
         username: data.username,
