@@ -28,6 +28,7 @@ export default function AccountMenu({ classes, mobile }: Props) {
 
   const logout = () => {
     handleClose();
+    localStorage.removeItem("token");
     setLoading(true);
     ctx.setUser(false);
     ctx.setPosts(
