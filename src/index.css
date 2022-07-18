@@ -45,7 +45,6 @@ box-shadow: inset 16px 16px 31px #011133,
 }
 
 .page {
-  overflow: hidden;
   scroll-behavior: smooth;
 }
 
@@ -99,19 +98,19 @@ box-shadow: inset 16px 16px 31px #011133,
 
 @keyframes show {
   from {
-    transform: translateX(-100%);
+    opacity: 0;
   }
   to {
-    transform: translateX(0);
+    opacity: 1;
   }
 }
 
 @keyframes remove {
   from {
-    transform: translateX(0);
+    opacity: 1;
   }
   to {
-    transform: translateX(100%);
+    opacity: 0;
   }
 }
 

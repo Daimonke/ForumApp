@@ -17,13 +17,16 @@ const Index = () => {
 
   const pageAnimation = () => {
     if (transition === "remove") {
-      setIsVisible(true);
+      const header = document.querySelector("header") as HTMLElement;
+      const headerH = header.offsetHeight;
+
       setDisplayLocation(location);
+      setIsVisible(true);
       setTransition("show");
-      if (window.scrollY > 0) {
+      if (window.scrollY > headerH) {
         setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }, 150);
+          window.scrollTo({ top: headerH, behavior: "smooth" });
+        }, 100);
       }
     }
   };
