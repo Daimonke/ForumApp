@@ -61,6 +61,10 @@ box-shadow: inset 16px 16px 31px #011133,
   animation: 0.3s fadeIn forwards;
 }
 
+.fadeOut {
+  animation: 0.3s fadeOut forwards;
+}
+
 .growAnimation {
   animation: 1s growAnimation linear;
 }
@@ -120,6 +124,15 @@ box-shadow: inset 16px 16px 31px #011133,
   }
   to {
     transform: translateY(0%)
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    transform: translateY(0%)
+  }
+  to {
+    transform: translateY(-100%)
   }
 }
 

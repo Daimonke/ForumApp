@@ -13,6 +13,8 @@ export type PostsPost = {
   postVotes: number;
   userVoted: number | null;
   comments: number;
+  original_content: string | null;
+  original_title: string | null;
 };
 
 export type PostsUser = {

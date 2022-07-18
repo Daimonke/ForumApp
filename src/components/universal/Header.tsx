@@ -88,22 +88,24 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
     >
       <Container className="relative bg">
         <div className="flex justify-center items-center flex-col m-auto">
-          <Link to="/">
-            {!imageLoaded && (
-              <Skeleton
-                variant="circular"
-                width={md ? "190px" : "90px"}
-                height={md ? "190px" : "90px"}
-                sx={{ m: 4.5 }}
-              />
-            )}
-            <img
-              src={logo}
-              alt="logo"
-              className={`h-32 md:h-64 ${imageLoaded ? "" : "hidden"}`}
-              onLoad={() => setImageLoaded(true)}
-            ></img>
-          </Link>
+          <span className={`${!isVisible ? "fadeOut" : ""}`}>
+            <Link to="/">
+              {!imageLoaded && (
+                <Skeleton
+                  variant="circular"
+                  width={md ? "190px" : "90px"}
+                  height={md ? "190px" : "90px"}
+                  sx={{ m: 4.5 }}
+                />
+              )}
+              <img
+                src={logo}
+                alt="logo"
+                className={`h-32 md:h-40 ${imageLoaded ? "" : "hidden"}`}
+                onLoad={() => setImageLoaded(true)}
+              ></img>
+            </Link>
+          </span>
           {ctx.user === false && md ? (
             <div className="w-full py-[33px]">
               <LinearProgress />
