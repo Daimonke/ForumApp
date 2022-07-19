@@ -16,12 +16,10 @@ const Home = () => {
   return (
     <div className="max-w-5xl m-auto">
       <FilterBar />
-
       <div className="max-w-5xl m-auto flex flex-col gap-5 p-3 md:p-5">
         {posts.length === 0 &&
           ctx.posts.length === 0 &&
           Array.from({ length: 10 }).map((_, i) => <PostSkeleton key={i} />)}
-
         {posts.map((item) => (
           <PostCard key={item.post.id} item={item} />
         ))}

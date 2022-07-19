@@ -79,7 +79,11 @@ const FilterBar = () => {
           }}
           icon={
             <PublicIcon
-              className=" bg-gray-200 rounded-full text-blue-600"
+              className={`rounded-full ${
+                ctx.user
+                  ? "text-blue-600 bg-gray-200"
+                  : "text-gray-800 bg-gray-400"
+              }`}
               sx={{
                 p: 0.1,
                 width: 32,
