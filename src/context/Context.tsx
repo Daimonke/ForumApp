@@ -46,6 +46,10 @@ type Ctx = {
   update: boolean;
   sortSwitch: string;
   setSortSwitch: (sortSwitch: Ctx["sortSwitch"]) => void;
+  displaySwitch: string;
+  setdisplaySwitch: (displaySwitch: Ctx["displaySwitch"]) => void;
+  postsQuery: string | boolean;
+  setPostsQuery: (postsQuery: Ctx["postsQuery"]) => void;
 };
 
 const initialValue: Ctx = {
@@ -58,6 +62,10 @@ const initialValue: Ctx = {
   update: false,
   sortSwitch: "",
   setSortSwitch: (sortSwitch) => {},
+  displaySwitch: "",
+  setdisplaySwitch: (displaySwitch) => {},
+  postsQuery: "",
+  setPostsQuery: (postsQuery) => {},
 };
 
 export const context = createContext(initialValue);
@@ -67,7 +75,10 @@ const Context = ({ children }: Props) => {
   const [posts, setPosts] = useState<PostsData[]>([]);
   const [update, setUpdate] = useState(initialValue.update);
   const [sortSwitch, setSortSwitch] = useState(initialValue.sortSwitch);
-
+  const [displaySwitch, setdisplaySwitch] = useState(
+    initialValue.displaySwitch
+  );
+  const [postsQuery, setPostsQuery] = useState(initialValue.postsQuery);
   const getUser = async () => {
     const user = await fetch(`${URL}/auth/verifyUser`, {
       headers: {
@@ -88,7 +99,7 @@ const Context = ({ children }: Props) => {
   };
 
   const getPosts = async () => {
-    const posts = await fetch(`${URL}/content/posts`, {
+    const posts = await fetch(`${URL}/content/posts/${postsQuery}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -100,8 +111,12 @@ const Context = ({ children }: Props) => {
   };
 
   useEffect(() => {
-    getUser();
     getPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [update, postsQuery]);
+
+  useEffect(() => {
+    getUser();
   }, [update]);
 
   return (
@@ -116,6 +131,10 @@ const Context = ({ children }: Props) => {
         update,
         sortSwitch,
         setSortSwitch,
+        displaySwitch,
+        setdisplaySwitch,
+        postsQuery,
+        setPostsQuery,
       }}
     >
       {children}

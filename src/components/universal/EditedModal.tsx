@@ -20,6 +20,7 @@ const style = {
   borderRadius: "8px",
   boxShadow: 24,
   p: 2,
+  outline: "none",
 };
 
 type Props = {
@@ -39,9 +40,6 @@ export default function EditedModal({ open, setOpen, comment, post }: Props) {
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      sx={{
-        outline: "none",
-      }}
     >
       <Box sx={style}>
         <div className="flex gap-2">

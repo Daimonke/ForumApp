@@ -18,6 +18,7 @@ const style = {
   borderRadius: "8px",
   boxShadow: 24,
   p: 4,
+  outline: "none",
 };
 
 type Props = {
@@ -36,9 +37,6 @@ export default function BasicModal({ open, setOpen }: Props) {
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      sx={{
-        outline: "none",
-      }}
     >
       <Box sx={style}>
         <IconButton

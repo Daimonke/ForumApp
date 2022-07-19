@@ -32,11 +32,15 @@ const PostNav = ({
   const [jump, setJump] = useState(false);
 
   const patchVote = (vote: number | null) => {
-    fetch(`${URL}/content/vote/${id}?vote=${vote}`, {
+    fetch(`${URL}/content/vote/${id}`, {
       method: "PATCH",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        vote: vote,
+      }),
     });
   };
 
