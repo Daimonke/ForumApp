@@ -41,6 +41,7 @@ const CommentCard = ({ data, comments, setComments }: Props) => {
               comment: {
                 ...item.comment,
                 comment: editValue,
+                original_comment: comment,
               },
             }
           : item

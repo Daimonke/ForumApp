@@ -96,7 +96,7 @@ const SinglePostBody = ({ post }: Props) => {
             type="text"
             className={`${
               editingMode ? "fadeIn" : "hidden"
-            } py-2 px-3 w-full h-[90%] outline-none border-2 border-blue-300 rounded-md focus:border-blue-500 text-gray-100 bg-black/50 placeholder-gray-400 ${
+            } py-2 px-3 w-full h-[90%] outline-none border-2 border-blue-300 rounded-md focus:border-blue-500 text-gray-100 bg-black/80 placeholder-gray-400 ${
               error ? "border-red-500" : ""
             }`}
             onAnimationEnd={() => setFirstLoad(false)}
@@ -128,7 +128,7 @@ const SinglePostBody = ({ post }: Props) => {
           <textarea
             className={`${
               editingMode ? "fadeIn" : "hidden"
-            } py-2 px-3 w-full h-[90%] outline-none border-2 border-blue-300 rounded-md focus:border-blue-500 text-gray-100 bg-black/50 placeholder-gray-400 ${
+            } py-2 px-3 w-full h-[90%] outline-none border-2 border-blue-300 rounded-md focus:border-blue-500 text-gray-100 bg-black/80 placeholder-gray-400 ${
               error ? "border-red-500" : ""
             }`}
             onAnimationEnd={() => setFirstLoad(false)}
@@ -143,13 +143,13 @@ const SinglePostBody = ({ post }: Props) => {
             <IconButton onClick={handleEdit}>
               <CheckBoxRoundedIcon
                 fontSize="large"
-                className="text-green-600"
+                className="text-green-700"
               />
             </IconButton>
             <IconButton onClick={handleClose}>
               <DisabledByDefaultRoundedIcon
                 fontSize="large"
-                className="text-red-600/90"
+                className="text-red-700/90"
               />
             </IconButton>
           </div>

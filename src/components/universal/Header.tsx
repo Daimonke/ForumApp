@@ -101,7 +101,7 @@ const Header = ({ isVisible, setIsVisible }: Props) => {
               <img
                 src={logo}
                 alt="logo"
-                className={`h-32 md:h-40 ${imageLoaded ? "" : "hidden"}`}
+                className={`h-32 md:h-64 ${imageLoaded ? "" : "hidden"}`}
                 onLoad={() => setImageLoaded(true)}
               ></img>
             </Link>
