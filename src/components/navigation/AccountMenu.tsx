@@ -30,6 +30,7 @@ export default function AccountMenu({ classes, mobile }: Props) {
     handleClose();
     localStorage.removeItem("token");
     setLoading(true);
+    ctx.setdisplaySwitch("");
     ctx.setUser(false);
     ctx.setPosts(
       ctx.posts.map((item) => ({

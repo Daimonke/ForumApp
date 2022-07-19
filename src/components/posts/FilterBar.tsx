@@ -1,52 +1,50 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Stack, Switch, Typography } from "@mui/material";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
 import { context } from "../../context/Context";
+import PersonIcon from "@mui/icons-material/Person";
+import PublicIcon from "@mui/icons-material/Public";
 
-type Props = {};
-
-const FilterBar = (props: Props) => {
+const FilterBar = () => {
   const ctx = useContext(context);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    ctx.setSortSwitch(e.target.checked ? "hot" : "new");
-    e.target.checked ? sortByHot() : sortByNew();
-  };
-  const sortByNew = () => {
-    const sorted = [...ctx.posts].sort(
-      (b, a) =>
-        new Date(a.post.created_at).getTime() -
-        new Date(b.post.created_at).getTime()
-    );
-    ctx.setPosts(sorted);
+  const [sortSwitch, setSortSwitch] = useState(
+    ctx.sortSwitch === "comments" ? true : false
+  );
+  const [displaySwitch, setdisplaySwitch] = useState(
+    Boolean(ctx.displaySwitch)
+  );
+
+  const handleSort = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSortSwitch(e.target.checked);
+    ctx.setSortSwitch(e.target.checked ? "comments" : "created_at");
   };
 
-  const sortByHot = () => {
-    const sorted = [...ctx.posts].sort(
-      (a, b) => b.post.comments - a.post.comments
-    );
-    ctx.setPosts(sorted);
+  const handleDisplay = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (ctx.user) {
+      setdisplaySwitch(e.target.checked);
+      ctx.setdisplaySwitch(e.target.checked ? `${ctx.user.id}` : "");
+    }
   };
 
   useEffect(() => {
-    if (ctx.sortSwitch === "new") sortByNew();
-    if (ctx.sortSwitch === "hot") sortByHot();
-  }, [ctx.sortSwitch, ctx.update]);
+    setSortSwitch(ctx.sortSwitch === "comments" ? true : false);
+    setdisplaySwitch(Boolean(ctx.displaySwitch));
+    ctx.setPostsQuery(`?sort=${ctx.sortSwitch}&display=${ctx.displaySwitch}`);
+  }, [ctx.sortSwitch, ctx.update, ctx.displaySwitch]);
 
   return (
-    <div className="py-2 px-4 md:p-4 mx-0 md:mx-5 border-b-2">
+    <div className="py-2 px-4 md:p-4 mx-0 md:mx-5 border-b-2 flex justify-between">
       <Stack direction="row" spacing={1} alignItems="center">
         <Typography>New</Typography>
         <MaterialUISwitch
           sx={{ m: 1 }}
-          onChange={handleChange}
-          checked={ctx.sortSwitch === "hot"}
+          onChange={handleSort}
+          checked={sortSwitch}
           classes={{
-            track: `${
-              ctx.sortSwitch === "hot" ? "!bg-red-500" : "!bg-blue-500"
-            }`,
+            track: `${sortSwitch ? "!bg-red-500" : "!bg-blue-500"}`,
           }}
           icon={
             <BoltRoundedIcon
@@ -68,6 +66,39 @@ const FilterBar = (props: Props) => {
           }
         />
         <Typography>Hot</Typography>
+      </Stack>
+      <Stack direction="row" spacing={1} alignItems="center">
+        <Typography>All</Typography>
+        <MaterialUISwitch
+          disabled={!ctx.user}
+          sx={{ m: 1 }}
+          onChange={handleDisplay}
+          checked={displaySwitch}
+          classes={{
+            track: `${displaySwitch ? "!bg-green-500" : "!bg-blue-500"}`,
+          }}
+          icon={
+            <PublicIcon
+              className=" bg-gray-200 rounded-full text-blue-600"
+              sx={{
+                p: 0.1,
+                width: 32,
+                height: 32,
+              }}
+            />
+          }
+          checkedIcon={
+            <PersonIcon
+              className="  bg-gray-200 rounded-full text-green-600"
+              sx={{
+                p: 0.2,
+                width: 32,
+                height: 32,
+              }}
+            />
+          }
+        />
+        <Typography>My</Typography>
       </Stack>
     </div>
   );
