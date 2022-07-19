@@ -24,9 +24,7 @@ const Index = () => {
       setIsVisible(true);
       setTransition("show");
       if (window.scrollY > headerH) {
-        setTimeout(() => {
-          window.scrollTo({ top: headerH, behavior: "smooth" });
-        }, 100);
+        window.scrollTo({ top: headerH });
       }
     }
   };

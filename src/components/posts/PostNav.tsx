@@ -7,14 +7,22 @@ import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded
 import { context, PostsPost } from "../../context/Context";
 import BasicModal from "../universal/BasicModal";
 import URL from "../../uri";
+import PostMenu from "./PostMenu";
 
 type Props = {
   post: PostsPost;
   disableCommentBtn?: boolean;
+  setEditingMode?: (mode: boolean) => void;
+  editingMode?: boolean;
 };
 
-const PostNav = ({ post, disableCommentBtn }: Props) => {
-  const { userVoted, postVotes, id, comments } = post;
+const PostNav = ({
+  post,
+  disableCommentBtn,
+  setEditingMode,
+  editingMode,
+}: Props) => {
+  const { userVoted, postVotes, id, comments, user_id } = post;
 
   const xs = useMediaQuery("(max-width: 400px)");
 
@@ -130,7 +138,12 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
           </IconButton>
         </div>
         <div className="w-full gap-3 flex items-center justify-end">
-          {!disableCommentBtn && (
+          {disableCommentBtn &&
+          setEditingMode &&
+          ctx.user &&
+          ctx.user.id === user_id ? (
+            <PostMenu setEditingMode={setEditingMode} />
+          ) : !disableCommentBtn ? (
             <Link
               to={`/post/${id}`}
               className="max-w-[400px] text-xs md:text-[1rem] text-center bg-blue-200 text-gray-800 font-bold p-2  rounded-md hover:bg-blue-500 transition-all w-full"
@@ -144,7 +157,7 @@ const PostNav = ({ post, disableCommentBtn }: Props) => {
                   : comments + " Comments"}
               </button>
             </Link>
-          )}
+          ) : null}
         </div>
         <BasicModal open={open} setOpen={setOpen} />
       </div>

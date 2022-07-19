@@ -13,6 +13,8 @@ export type PostsPost = {
   postVotes: number;
   userVoted: number | null;
   comments: number;
+  original_content: string | null;
+  original_title: string | null;
 };
 
 export type PostsUser = {
@@ -42,6 +44,8 @@ type Ctx = {
   getPosts: () => void;
   setUpdate: (update: boolean) => void;
   update: boolean;
+  sortSwitch: string;
+  setSortSwitch: (sortSwitch: Ctx["sortSwitch"]) => void;
 };
 
 const initialValue: Ctx = {
@@ -52,6 +56,8 @@ const initialValue: Ctx = {
   getPosts: () => {},
   setUpdate: (update) => {},
   update: false,
+  sortSwitch: "",
+  setSortSwitch: (sortSwitch) => {},
 };
 
 export const context = createContext(initialValue);
@@ -60,6 +66,7 @@ const Context = ({ children }: Props) => {
   const [user, setUser] = useState(initialValue.user);
   const [posts, setPosts] = useState<PostsData[]>([]);
   const [update, setUpdate] = useState(initialValue.update);
+  const [sortSwitch, setSortSwitch] = useState(initialValue.sortSwitch);
 
   const getUser = async () => {
     const user = await fetch(`${URL}/auth/verifyUser`, {
@@ -99,7 +106,17 @@ const Context = ({ children }: Props) => {
 
   return (
     <context.Provider
-      value={{ user, setUser, posts, setPosts, getPosts, setUpdate, update }}
+      value={{
+        user,
+        setUser,
+        posts,
+        setPosts,
+        getPosts,
+        setUpdate,
+        update,
+        sortSwitch,
+        setSortSwitch,
+      }}
     >
       {children}
     </context.Provider>

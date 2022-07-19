@@ -43,6 +43,7 @@ const CommentBar = ({ comments, setComments }: Props) => {
             created_at: data.created_at,
             commentVotes: 0,
             userVoted: null,
+            original_comment: null,
           },
           user: {
             id: ctx.user.id,

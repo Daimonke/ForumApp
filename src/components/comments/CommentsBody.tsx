@@ -15,6 +15,7 @@ export type CommentData = {
     created_at: string;
     commentVotes: number;
     userVoted: number | null;
+    original_comment: string | null;
   };
   user: {
     id: number;

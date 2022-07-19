@@ -6,6 +6,7 @@ import { CommentData } from "./CommentsBody";
 import DisabledByDefaultRoundedIcon from "@mui/icons-material/DisabledByDefaultRounded";
 import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
 import URL from "../../uri";
+import EditedModal from "../universal/EditedModal";
 
 type Props = {
   data: CommentData;
@@ -14,11 +15,12 @@ type Props = {
 };
 
 const CommentCard = ({ data, comments, setComments }: Props) => {
-  const { comment, id } = data.comment;
+  const { comment, id, original_comment } = data.comment;
   const [editingMode, setEditingMode] = useState(false);
   const [firstLoad, setFirstLoad] = useState(true);
   const [editValue, setEditValue] = useState(comment);
   const [error, setError] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClose = () => {
     setError(false);
@@ -39,6 +41,7 @@ const CommentCard = ({ data, comments, setComments }: Props) => {
               comment: {
                 ...item.comment,
                 comment: editValue,
+                original_comment: comment,
               },
             }
           : item
@@ -68,11 +71,19 @@ const CommentCard = ({ data, comments, setComments }: Props) => {
       setComments(oldComments);
     }
   };
-  
+
   return (
-    <div className="shadow-md shadow-black flex gap-4 p-3 rounded-md bg-gradient-to-t from-black/60 to-gray-600/60 text-gray-100">
+    <div className="shadow-md shadow-black flex gap-4 p-3 rounded-md bg-gradient-to-t from-black/60 to-gray-600/60 text-gray-100 relative">
       <UserCard user={data.user} styles={"!justify-start"} />
-      <div className="flex justify-start flex-col w-full overflow-hidden relative">
+      {original_comment && !editingMode && (
+        <button
+          className="cursor-pointer h-fit w-fit absolute top-1 right-2 text-xs md:text-sm text-green-500"
+          onClick={() => setOpen(true)}
+        >
+          Edited
+        </button>
+      )}
+      <div className="flex justify-start flex-col w-full overflow-hidden">
         <div className="h-full flex">
           <textarea
             className={`${
@@ -122,6 +133,7 @@ const CommentCard = ({ data, comments, setComments }: Props) => {
           setEditingMode={setEditingMode}
         />
       </div>
+      <EditedModal open={open} setOpen={setOpen} comment={data} />
     </div>
   );
 };
